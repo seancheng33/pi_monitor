@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 我自己的应用
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -81,12 +85,27 @@ WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': None, # 把默认的数据库连接至为None
+    'default':{
+     'ENGINE':'django.db.backends.mysql',
+     'HOST':'192.168.1.89',
+     'PORT':'3306',
+     'NAME':'monitor',  # 数据库名
+     'USER':'root',
+     'PASSWORD':'Tkp@443414',
+     'OPTIONS':{
+         'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+     },
     }
 }
-from mongoengine import connect
-connect('test',host='192.168.1.89',port=27017,username='admin',password='123456',authentication_source='admin') # 连接的数据库名称
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': None
+#     }
+# }
+# from mongoengine import *
+# # authentication_source='admin'是必须的。不然会报错Authentication failed
+# connect('test', host='192.168.1.89', port=27017, username='admin', password='123456', authentication_source='admin')
 
 
 # Password validation
@@ -111,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'UTC'
 
