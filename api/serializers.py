@@ -11,7 +11,7 @@ from .models import *
 class MemInfoSerrializers(serializers.ModelSerializer):
     class Meta:
         model = MemInfoModel
-        fields = ('pk', 'date', 'mem_used', 'men_free', 'mem_total',)
+        fields = ('pk', 'date', 'mem_used', 'mem_free', 'mem_total',)
 
 
 class LoginFailedSerrializers(serializers.ModelSerializer):
