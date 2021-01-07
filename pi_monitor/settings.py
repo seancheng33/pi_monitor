@@ -16,7 +16,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'duz1-%z#$xo*1!ge&p6ox-uiysh$9-#&n_uy3$(cfct&+h%ime'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -73,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -85,16 +82,16 @@ WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 # }
 
 DATABASES = {
-    'default':{
-     'ENGINE':'django.db.backends.mysql',
-     'HOST':'192.168.1.89',
-     'PORT':'3306',
-     'NAME':'monitor',  # 数据库名
-     'USER':'root',
-     'PASSWORD':'Tkp@443414',
-     'OPTIONS':{
-         'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
-     },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '',
+        'PORT': '3306',
+        'NAME': 'monitor',  # 数据库名
+        'USER': '',
+        'PASSWORD': '',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        },
     }
 }
 
@@ -126,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -139,7 +135,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

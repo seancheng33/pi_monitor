@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class MemInfoModel(models.Model):
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateTimeField(default=timezone.now)   # 使用插入数据时的当前时间作为数据的采集时间，不用去想插入的数据的格式问题。
     mem_used = models.CharField(max_length=50)
     mem_free = models.CharField(max_length=50)
     mem_total = models.CharField(max_length=50)
