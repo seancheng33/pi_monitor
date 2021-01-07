@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
         'NAME': 'monitor',  # 数据库名
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'root',
+        'PASSWORD': '123456',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
