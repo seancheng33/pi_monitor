@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 我自己的应用
-    'rest_framework',
+    'rest_framework',   # 这个rest的应用需要是在api的全面
     'api',
 ]
 
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.1.89',
         'PORT': '3306',
         'NAME': 'monitor',  # 数据库名
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'Tkp@443414',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
@@ -128,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

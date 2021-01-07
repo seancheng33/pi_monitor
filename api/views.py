@@ -6,12 +6,12 @@ from .serializers import *
 
 # Create your views here.
 class MemInfoView(viewsets.ModelViewSet):
-    queryset = MemInfoModel.objects.all().order_by('-pk')
+    queryset = MemInfo.objects.all().order_by('-pk')
 
     serializer_class = MemInfoSerrializers
 
 
 class LoginFailedView(viewsets.ModelViewSet):
-    queryset = LoginFailedModel.objects.all().order_by('-pk')
+    queryset = LoginFailed.objects.all().order_by('-pk')
 
     serializer_class = LoginFailedSerrializers

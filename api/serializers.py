@@ -10,11 +10,11 @@ from .models import *
 
 class MemInfoSerrializers(serializers.ModelSerializer):
     class Meta:
-        model = MemInfoModel
+        model = MemInfo
         fields = ('pk', 'date', 'mem_used', 'mem_free', 'mem_total',)
 
 
 class LoginFailedSerrializers(serializers.ModelSerializer):
     class Meta:
-        model = LoginFailedModel
+        model = LoginFailed
         fields = ('pk', 'date', 'fail_name', 'fail_ip',)
