@@ -1,2 +1,3 @@
 /venv/
 pi_monitor/settings.py
+api/migrations

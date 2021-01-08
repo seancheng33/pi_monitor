@@ -24,7 +24,7 @@ def getMemoryInfo():
     swap_total = os.popen("free -m|awk '/Swap:/||/交换：/  {print $2}'").readline()
     swap_used = os.popen("free -m|awk '/Swap:/||/交换：/  {print $3}'").readline()
     swap_free = os.popen("free -m|awk '/Swap:/||/交换：/  {print $4}'").readline()
-    # 将获取到的内容拼接成一条到时需要传给接口的json数据。
+    # 将获取到的内容拼接成一条字典，到时需要传给接口前再转换成json。
     meminfo = {"mem_total": mem_total.replace('\n', '') + "M", "mem_used": mem_used.replace('\n', '') + "M",
                "mem_free": mem_free.replace('\n', '') + "M", "mem_shared": mem_shared.replace('\n', '') + "M",
                "mem_buff": mem_buff.replace('\n', '') + "M", "mem_available": mem_available.replace('\n', '') + "M",
@@ -57,7 +57,10 @@ if __name__ == '__main__':
 
     #os.popen("curl -H 'content-type: application/json' -d '"+str(diskinfo)+"' -X post http://192.168.1.23:8000/api/diskinfo/").readlines()
     #print(getDiskInfo())
+
+    # 获取
     diskinfo = getDiskInfo()
+    # 传出来的磁盘数据可能不止一条，需要遍历然后每条都传给接口去插入数据。
     for item in diskinfo:
         info = json.dumps(item)
         # print("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://192.168.1.23:8000/api/diskinfo/")
