@@ -7,6 +7,8 @@ class MechineInfo(models.Model):
     os_name = models.CharField(max_length=20)
     sn = models.CharField(max_length=20)
     os_ip = models.CharField(max_length=20)
+    mac = models.CharField(max_length=20)
+    handdisk_info = models.CharField(max_length=20)
 
 
 class MemInfo(models.Model):
@@ -19,9 +21,16 @@ class MemInfo(models.Model):
         return '%d:%s' % (self.pk, self.mem_used)
 
 class LoginFailed(models.Model):
-    date = models.DateField()
+    date = models.DateTimeField(default=timezone.now)
     fail_name = models.CharField(max_length=50)
     fail_ip = models.CharField(max_length=50)
 
     def __unicode__(self):
         return '%d:%s' % (self.pk, self.fail_ip)
+
+class CPUInfo(models.Model):
+    date = models.DateTimeField(default=timezone.now)
+    cpu_temp = models.CharField(max_length=10)
+    cpu_user = models.CharField(max_length=20)
+    cpu_system = models.CharField(max_length=20)
+    cpu_free = models.CharField(max_length=20)
