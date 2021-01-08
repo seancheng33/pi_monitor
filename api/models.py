@@ -7,8 +7,10 @@ class MechineInfo(models.Model):
     os_name = models.CharField(max_length=20)
     sn = models.CharField(max_length=20)
     os_ip = models.CharField(max_length=20)
-    mac = models.CharField(max_length=20)
-    handdisk_info = models.CharField(max_length=20)
+
+
+    def __unicode__(self):
+        return '%d:%s' % (self.pk, self.os_name)
 
 
 class MemInfo(models.Model):
@@ -16,11 +18,19 @@ class MemInfo(models.Model):
     mem_used = models.CharField(max_length=50)
     mem_free = models.CharField(max_length=50)
     mem_total = models.CharField(max_length=50)
+    mem_shared = models.CharField(max_length=50)
+    mem_buff = models.CharField(max_length=50)
+    mem_available = models.CharField(max_length=50)
+    swap_total = models.CharField(max_length=50)
+    swap_used = models.CharField(max_length=50)
+    swap_free = models.CharField(max_length=50)
+
 
     def __unicode__(self):
         return '%d:%s' % (self.pk, self.mem_used)
 
 class LoginFailed(models.Model):
+
     date = models.DateTimeField(default=timezone.now)
     fail_name = models.CharField(max_length=50)
     fail_ip = models.CharField(max_length=50)
@@ -34,3 +44,19 @@ class CPUInfo(models.Model):
     cpu_user = models.CharField(max_length=20)
     cpu_system = models.CharField(max_length=20)
     cpu_free = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%d:%s' % (self.pk, self.cpu_temp)
+
+
+class DiskInfo(models.Model):
+    date = models.DateTimeField(default=timezone.now)
+    mount_point = models.CharField(max_length=30)
+    disk_type = models.CharField(max_length=20)
+    disk_total = models.CharField(max_length=20)
+    disk_used = models.CharField(max_length=20)
+    disk_available = models.CharField(max_length=20)
+    used_percent = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%d:%s' % (self.pk, self.mount_point)

@@ -15,3 +15,9 @@ class LoginFailedView(viewsets.ModelViewSet):
     queryset = LoginFailed.objects.all().order_by('-pk')
 
     serializer_class = LoginFailedSerrializers
+
+
+class DiskInfoView(viewsets.ModelViewSet):
+    queryset = DiskInfo.objects.all().order_by('-pk')
+
+    serializer_class = DiskInfoSerrializers
