@@ -4,10 +4,16 @@ from django.db import models
 from django.utils import timezone
 
 class MechineInfo(models.Model):
-    os_name = models.CharField(max_length=20)
-    sn = models.CharField(max_length=20)
-    os_ip = models.CharField(max_length=20)
-
+    os_system = models.CharField(max_length=20)
+    os_node = models.CharField(max_length=20)
+    os_release = models.CharField(max_length=20)
+    os_version = models.CharField(max_length=20)
+    os_machine = models.CharField(max_length=20)
+    os_processor = models.CharField(max_length=20)
+    hostname = models.CharField(max_length=20)
+    host_ip = models.CharField(max_length=20)
+    uptime = models.CharField(max_length=20)
+    mac_address  = models.CharField(max_length=50)
 
     def __unicode__(self):
         return '%d:%s' % (self.pk, self.os_name)
@@ -24,7 +30,6 @@ class MemInfo(models.Model):
     swap_total = models.CharField(max_length=50)
     swap_used = models.CharField(max_length=50)
     swap_free = models.CharField(max_length=50)
-
 
     def __unicode__(self):
         return '%d:%s' % (self.pk, self.mem_used)
