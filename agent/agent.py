@@ -36,7 +36,7 @@ def getSyetemInfo():
 
     sysinfo = {"os_system":system,"os_node":node,"os_release":release,"os_version":version,"os_machine":machine,"os_processor":processor,"hostname":hostname,"host_ip":host_ip,"mac_address":mac_address,"uptime":uptime,}
 
-    print(sysinfo)
+    return sysinfo
 
 
 # 获取内存的信息，其中awk命令使用了或判断，防止某些系统free出来的结果是中文的
@@ -80,13 +80,23 @@ def getDiskInfo():
     return all_disk_info
 if __name__ == '__main__':
 
-    getSyetemInfo()
+    # 获取系统的信息
+    sysinfo = json.dumps(getSyetemInfo())
+    print(type(sysinfo))
+    check_sys = os.popen('curl http://192.168.1.23:8000/api/mechineinfo/').readlines()
+    # 这里有作一个判断，如果mac地址相同，就只是更新数据，如果没有，就新添加数据。
+    if len(check_sys) and json.loads(check_sys[0][1:-1]).get('mac_address') == eval(sysinfo)['mac_address']:
+        # sysinfo = eval(sysinfo)
+        pk = json.loads(check_sys[0][1:-1]).get('pk')
+        # print(sysinfo)
+        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://192.168.1.23:8000/api/mechineinfo/"+str(pk)+"/").readlines()
+    else:
+        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://192.168.1.23:8000/api/mechineinfo/").readlines()
 
     # 获取内存的信息
     # meminfo = json.dumps(getMemoryInfo())
     # print(meminfo)
     # os.popen("curl -H 'content-type: application/json' -d '"+str(meminfo)+"' -X post http://192.168.1.23:8000/api/meminfo/").readlines()
-
 
     # 获取磁盘的信息
     # diskinfo = getDiskInfo()
