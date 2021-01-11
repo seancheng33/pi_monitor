@@ -14,6 +14,7 @@ route = routers.DefaultRouter()
 route.register(r'meminfo', views.MemInfoView)
 route.register(r'loginfailed', views.LoginFailedView)
 route.register(r'diskinfo', views.DiskInfoView)
+route.register(r'mechineInfo', views.MechineInfoView)
 
 urlpatterns = [
     url('api/', include(route.urls)),

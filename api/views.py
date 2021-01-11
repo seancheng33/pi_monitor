@@ -21,3 +21,8 @@ class DiskInfoView(viewsets.ModelViewSet):
     queryset = DiskInfo.objects.all().order_by('-pk')
 
     serializer_class = DiskInfoSerrializers
+
+class MechineInfoView(viewsets.ModelViewSet):
+    queryset = MechineInfo.objects.all().order_by('-pk')
+
+    serializer_class = MechineInfoSerrializers

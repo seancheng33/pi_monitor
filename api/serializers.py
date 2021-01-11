@@ -23,3 +23,8 @@ class DiskInfoSerrializers(serializers.ModelSerializer):
     class Meta:
         model = DiskInfo
         fields = ('pk', 'date', 'mount_point', 'disk_type', 'disk_total', 'disk_used', 'disk_available', 'used_percent',)
+
+class MechineInfoSerrializers(serializers.ModelSerializer):
+    class Meta:
+        model = MechineInfo
+        fields = ('pk', 'os_system', 'os_node', 'os_release', 'os_version', 'os_machine', 'os_processor', 'hostname', 'host_ip', 'uptime', 'mac_address',)
