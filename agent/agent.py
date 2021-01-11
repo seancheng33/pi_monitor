@@ -14,6 +14,7 @@ import re
 # 获取系统的信息内容。
 def getSyetemInfo():
     # 使用python自己的模块来获取系统的信息，比如操作系统的名称、节点名（hostname）、版本号、等等
+    # 这个函数获取的结果，基本和在linux系统下用uname -a获取的结果一致。但是这个函数同样在windows下同样可以取值。
     info = platform.uname()
     system = info[0]
     node = info[1]
@@ -21,13 +22,14 @@ def getSyetemInfo():
     version = info[3]
     machine = info[4]
     processor = info[5]
-    # hostname
+    # 通过socket模块获取hostname和ip地址。但是可能存在ip地址非内网地址的情况
     hostname = socket.gethostname()
     host_ip = socket.gethostbyname(hostname)
-    # 获取mac地址
+    # 获取mac地址，这个办法在虚拟机的ubuntu中是出现有误，但是在其他真机的测试中暂时没有发现有误。
     mac = uuid.uuid1().hex
+    # 最后12位就是mac的内容，将其取出，然后全部小写改为大写。
     mac = mac[-12:].upper()
-
+    # 将数据拼接成两位然后冒号隔开的一般常用的mac地址的形式。
     mac_address = re.findall(r".{2}",mac)
     mac_address = ':'.join(mac_address)
 
@@ -86,7 +88,7 @@ if __name__ == '__main__':
     check_sys = os.popen('curl http://192.168.1.23:8000/api/mechineinfo/').readlines()
     # 这里有作一个判断，如果mac地址相同，就只是更新数据，如果没有，就新添加数据。
     if len(check_sys) and json.loads(check_sys[0][1:-1]).get('mac_address') == eval(sysinfo)['mac_address']:
-        # sysinfo = eval(sysinfo)
+        # 获取系统信息数据的pk值，用于到时更新数据时使用。
         pk = json.loads(check_sys[0][1:-1]).get('pk')
         # print(sysinfo)
         os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://192.168.1.23:8000/api/mechineinfo/"+str(pk)+"/").readlines()
@@ -106,3 +108,4 @@ if __name__ == '__main__':
     #    info = json.dumps(item)
     #    os.popen("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://192.168.1.23:8000/api/diskinfo/").readlines()
 
+    
