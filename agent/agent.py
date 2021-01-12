@@ -48,7 +48,7 @@ def getSyetemInfo():
 
     sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version, "os_machine": machine,
                "os_processor": processor, "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
-               "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model, }
+               "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model,}
 
     return sysinfo
 
@@ -119,20 +119,23 @@ if __name__ == '__main__':
 
     # 获取系统的信息
     sysinfo = json.dumps(getSyetemInfo())
-    print(type(sysinfo))
+    # print(sysinfo)
     check_sys = os.popen('curl http://192.168.1.23:8000/api/mechineinfo/').readlines()
-    # 这里有作一个判断，如果mac地址相同，就只是更新数据，如果没有，就新添加数据。
-    if len(check_sys) and json.loads(check_sys[0][1:-1]).get('mac_address') == eval(sysinfo)['mac_address']:
-        # 获取系统信息数据的pk值，用于到时更新数据时使用。
-        pk = json.loads(check_sys[0][1:-1]).get('pk')
-        # print(sysinfo)
-        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://192.168.1.23:8000/api/mechineinfo/"+str(pk)+"/").readlines()
+    # 这里有作一个判断，如果mac地址相同，就只是更新对应主键的数据，如果没有，就新添加数据。
+    if len(check_sys) :
+        for item in json.loads(check_sys[0]):
+            # print(item)
+            if item.get('mac_address') == eval(sysinfo)['mac_address']:
+                # 获取系统信息数据的pk值，用于到时更新数据时使用。
+                pk = item.get('pk')
+                # print(sysinfo)
+                os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://192.168.1.23:8000/api/mechineinfo/"+str(pk)+"/").readlines()
     else:
         os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://192.168.1.23:8000/api/mechineinfo/").readlines()
 
     # 获取内存的信息
     meminfo = json.dumps(getMemoryInfo())
-    print(meminfo)
+    # print(meminfo)
     os.popen("curl -H 'content-type: application/json' -d '"+str(meminfo)+"' -X post http://192.168.1.23:8000/api/meminfo/").readlines()
 
     # 获取磁盘的信息
@@ -144,5 +147,5 @@ if __name__ == '__main__':
        os.popen("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://192.168.1.23:8000/api/diskinfo/").readlines()
 
     cpuinfo = json.dumps(getCPUInfo())
-    print(cpuinfo)
+    # print(cpuinfo)
     os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://192.168.1.23:8000/api/cpuinfo/").readlines()

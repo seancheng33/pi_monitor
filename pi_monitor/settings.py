@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # 我自己的应用
     'rest_framework',   # 这个rest的应用需要是在api的全面
     'api',
+    'datashow',
 ]
 
 MIDDLEWARE = [

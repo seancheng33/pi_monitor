@@ -1,3 +1,4 @@
 /venv/
-pi_monitor/settings.py
-api/migrations
+/pi_monitor/settings.py
+/api/migrations/
+/datashow/migrations/
