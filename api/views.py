@@ -28,5 +28,7 @@ class MechineInfoView(viewsets.ModelViewSet):
 
     serializer_class = MechineInfoSerrializers
 
-    # search_fields = ['os_system', ]
-    # filter_backends = [search_fields, ]
+class CPUInfoView(viewsets.ModelViewSet):
+    queryset = CPUInfo.objects.all().order_by('-pk')
+
+    serializer_class = CPUInfoSerrializers
