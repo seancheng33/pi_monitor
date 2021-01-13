@@ -16,7 +16,11 @@ def index(request):
 
     start_date = now_time - timedelta(hours=23, minutes=59, seconds=59)
     end_date = now_time
+    # 这里获取的是内存的信息，使用的是时间范围。
     memory_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+
+
+
     # print(memory_data)
     context = {"result": result, "memory_data": memory_data,}
     return render(request, "index.html", context)

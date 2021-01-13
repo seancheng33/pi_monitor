@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 我自己的应用
-    'rest_framework',   # 这个rest的应用需要是在api的全面
+    'rest_framework',   # 这个rest的应用需要是在api的前面
+    'django_crontab',   # 服务端定时任务的插件
     'api',
     'datashow',
 ]
@@ -143,3 +144,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR,"/static/")
+
+# 这里添加定时任务,这个插件的定时任务在windows中无法使用，等移植到linux下再用。
+# CRONJOBS=(
+# 	# 每一分钟执行一次你的定时函数
+# 	('*/ * * * *', 'api.cron.test'),
+# )
