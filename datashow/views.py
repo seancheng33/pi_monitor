@@ -19,8 +19,13 @@ def index(request):
     # 这里获取的是内存的信息，使用的是时间范围。
     memory_data = MemInfo.objects.filter(date__range=(start_date, end_date))
 
+    disk_data = DiskInfo.objects.filter(mount_point="/").order_by('-date').last()
 
+    cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
 
-    # print(memory_data)
-    context = {"result": result, "memory_data": memory_data,}
+    # print(disk_data)
+    # for item in disk_data:
+    #     print(item.used_percent,item.mount_point)
+    context = {"result": result, "memory_data": memory_data,"disk_data":disk_data,"cpu_data":cpu_data,}
+
     return render(request, "index.html", context)
