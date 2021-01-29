@@ -145,8 +145,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR,"/static/")
 
-# 这里添加定时任务,这个插件的定时任务在windows中无法使用，等移植到linux下再用。
+# # 这里添加定时任务,这个插件的定时任务在windows中无法使用，等移植到linux下再用。
+# # 部署的时候需要使用python manager.py crontab add将定时任务添加到系统中
 # CRONJOBS=(
 # 	# 每一分钟执行一次你的定时函数
-# 	('*/ * * * *', 'api.cron.test'),
+# 	('*/1 * * * *', 'django.core.management.call_command', ['python /mnt/usbdisk1/pi_monitor/agent/agent.py']),
 # )

@@ -9,7 +9,6 @@ class MechineInfo(models.Model):
     os_release = models.CharField(max_length=50, default="")
     os_version = models.CharField(max_length=50, default="")
     os_machine = models.CharField(max_length=50, default="")
-    os_processor = models.CharField(max_length=50, default="")
     hostname = models.CharField(max_length=50, default="")
     host_ip = models.CharField(max_length=50, default="")
     uptime = models.CharField(max_length=50, default="")

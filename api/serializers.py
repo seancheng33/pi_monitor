@@ -27,7 +27,7 @@ class DiskInfoSerrializers(serializers.ModelSerializer):
 class MechineInfoSerrializers(serializers.ModelSerializer):
     class Meta:
         model = MechineInfo
-        fields = ('pk', 'os_system', 'os_node', 'os_release', 'os_version', 'os_machine', 'os_processor', 'hostname', 'host_ip', 'uptime', 'mac_address','cpu_num','cpu_modelname','cpu_model',)
+        fields = ('pk', 'os_system', 'os_node', 'os_release', 'os_version', 'os_machine', 'hostname', 'host_ip', 'uptime', 'mac_address','cpu_num','cpu_modelname','cpu_model',)
 
 class CPUInfoSerrializers(serializers.ModelSerializer):
     class Meta:

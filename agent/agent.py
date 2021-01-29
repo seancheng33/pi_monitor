@@ -23,7 +23,6 @@ def getSyetemInfo():
     release = info[2]
     version = info[3]
     machine = info[4]
-    processor = info[5]
     # 通过socket模块获取hostname和ip地址。但是可能存在ip地址非内网地址的情况
     hostname = socket.gethostname()
     host_ip = socket.gethostbyname(hostname)
@@ -47,7 +46,7 @@ def getSyetemInfo():
         "grep 'model' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline()
 
     sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version, "os_machine": machine,
-               "os_processor": processor, "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
+               "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
                "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model,}
 
     return sysinfo
@@ -122,7 +121,7 @@ if __name__ == '__main__':
     # print(sysinfo)
     check_sys = os.popen('curl http://192.168.1.23:8000/api/mechineinfo/').readlines()
     # 这里有作一个判断，如果mac地址相同，就只是更新对应主键的数据，如果没有，就新添加数据。
-    if len(check_sys) :
+    if len(check_sys):
         for item in json.loads(check_sys[0]):
             # print(item)
             if item.get('mac_address') == eval(sysinfo)['mac_address']:
