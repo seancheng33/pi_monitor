@@ -23,6 +23,7 @@ def getSyetemInfo():
     release = info[2]
     version = info[3]
     machine = info[4]
+
     # 通过socket模块获取hostname和ip地址。但是可能存在ip地址非内网地址的情况
     hostname = socket.gethostname()
     host_ip = socket.gethostbyname(hostname)
@@ -39,14 +40,14 @@ def getSyetemInfo():
         "uptime|awk -F ',' '{print $1}'|awk '{print $3}'").readline().replace('\n', '')
 
     # 获取cpu的型号信息，这三项不要用readlines拿一个列表，只取第一个值就可以了
-    cpu_num = os.popen("grep 'processor' /proc/cpuinfo|wc -l").readline()
+    cpu_num = os.popen("grep 'processor' /proc/cpuinfo|wc -l").readline().replace('\n', '')
     cpu_modelname = os.popen(
-        "grep 'model name' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline()
+        "grep 'model name' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline().replace('\n', '')
     cpu_model = os.popen(
-        "grep 'model' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline()
+        "grep 'model' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline().replace('\n', '')
 
     sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version, "os_machine": machine,
-               "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
+               "os_processor": processor, "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
                "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model,}
 
     return sysinfo
@@ -119,32 +120,35 @@ if __name__ == '__main__':
     # 获取系统的信息
     sysinfo = json.dumps(getSyetemInfo())
     # print(sysinfo)
-    check_sys = os.popen('curl http://192.168.1.23:8000/api/mechineinfo/').readlines()
+    check_sys = os.popen('curl http://127.0.0.1:8000/api/mechineinfo/').readlines()
     # 这里有作一个判断，如果mac地址相同，就只是更新对应主键的数据，如果没有，就新添加数据。
-    if len(check_sys):
+    print(sysinfo)
+    if len(check_sys) > 0:
         for item in json.loads(check_sys[0]):
             # print(item)
             if item.get('mac_address') == eval(sysinfo)['mac_address']:
                 # 获取系统信息数据的pk值，用于到时更新数据时使用。
                 pk = item.get('pk')
                 # print(sysinfo)
-                os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://192.168.1.23:8000/api/mechineinfo/"+str(pk)+"/").readlines()
+                os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://127.0.0.1:8000/api/mechineinfo/"+str(pk)+"/").readlines()
     else:
-        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://192.168.1.23:8000/api/mechineinfo/").readlines()
+        # print(sysinfo)
+        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://127.0.0.1:8000/api/mechineinfo/").readlines()
 
     # 获取内存的信息
     meminfo = json.dumps(getMemoryInfo())
     # print(meminfo)
-    os.popen("curl -H 'content-type: application/json' -d '"+str(meminfo)+"' -X post http://192.168.1.23:8000/api/meminfo/").readlines()
+    os.popen("curl -H 'content-type: application/json' -d '"+str(meminfo)+"' -X post http://127.0.0.1:8000/api/meminfo/").readlines()
 
     # 获取磁盘的信息
     diskinfo = getDiskInfo()
+    # print(diskinfo)
     # 因为磁盘信息传出来的是一个list，所以需要遍历数据，把每一个都拿出来。
     for item in diskinfo:
        # list里面的元素在函数中拼接的时候是字典，这里需要转成json的格式传给接口，不然接口会接收不到数据
        info = json.dumps(item)
-       os.popen("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://192.168.1.23:8000/api/diskinfo/").readlines()
+       os.popen("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://127.0.0.1:8000/api/diskinfo/").readlines()
 
     cpuinfo = json.dumps(getCPUInfo())
     # print(cpuinfo)
-    os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://192.168.1.23:8000/api/cpuinfo/").readlines()
+    os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://127.0.0.1:8000/api/cpuinfo/").readlines()

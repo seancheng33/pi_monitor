@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>图形化显示监控数据</title>
     <script src="{% static 'echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'axios.min.js' %}"></script>
+    <script src="{% static 'vue.js' %}"></script>
 </head>
 <body>
 <li>操作系统：{{result.os_system}}</li>
@@ -126,7 +128,7 @@
             trigger: 'axis'
         },
         legend: {
-            data: ['已用内存', '可用内存']
+            data: ['用户使用', '系统使用']
         },
         toolbox: {
             show: true,
