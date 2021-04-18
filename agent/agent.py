@@ -12,8 +12,6 @@ import uuid
 import re
 
 # 获取系统的信息内容。
-
-
 def getSyetemInfo():
     # 使用python自己的模块来获取系统的信息，比如操作系统的名称、节点名（hostname）、版本号、等等
     # 这个函数获取的结果，基本和在linux系统下用uname -a获取的结果一致。但是这个函数同样在windows下同样可以取值。
@@ -78,8 +76,6 @@ def getMemoryInfo():
     return meminfo
 
 # 获取CPU的用户使用量百分比，系统使用量百分比，一分钟负载，五分钟负载，十五分钟负载
-
-
 def getCPUInfo():
     cpu_user_precent = os.popen(
         "top -n1|awk -F ' ' '/%Cpu/ {print $2}'").readline()
@@ -98,8 +94,6 @@ def getCPUInfo():
     return cpuinfo
 
 # 获取磁盘的空间信息，由于服务器可能挂载多个数据盘，所以需要获取多个分区和挂载点的信息
-
-
 def getDiskInfo():
     disk = os.popen(
         "df -Th|grep -v '/dev/loop'|awk '/^\/dev\// {print $0}'").readlines()
