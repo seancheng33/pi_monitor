@@ -77,10 +77,16 @@ def getMemoryInfo():
 
 # 获取CPU的用户使用量百分比，系统使用量百分比，一分钟负载，五分钟负载，十五分钟负载
 def getCPUInfo():
+    # 这里的执行top命令要加一个-b的参数，否则的话，会有问题，报错“  top: failed tty get 错误”。导致cpu的内容无法获取并写入。
+    '''
+    通过其他程序或脚本在非交互式模式下调用top命令，经常会出现:
+    top: failed tty get 错误
+    解决办法：加个-b 选项即可
+    '''
     cpu_user_precent = os.popen(
-        "top -n1|awk -F ' ' '/%Cpu/ {print $2}'").readline()
+        "top -bn1|awk -F ' ' '/%Cpu/ {print $2}'").readline()
     cpu_sys_precent = os.popen(
-        "top -n1|awk -F ' ' '/%Cpu/ {print $4}'").readline()
+        "top -bn1|awk -F ' ' '/%Cpu/ {print $4}'").readline()
     cpu_load_averages1 = os.popen(
         "uptime|awk -F 'load average:' '{print $2}'|awk -F ',' '{print $1}'").readline()
     cpu_load_averages5 = os.popen(
@@ -116,7 +122,7 @@ if __name__ == '__main__':
     # print(sysinfo)
     check_sys = os.popen('curl http://127.0.0.1:8000/api/mechineinfo/').readlines()
     # 这里有作一个判断，如果mac地址相同，就只是更新对应主键的数据，如果没有，就新添加数据。
-    print(sysinfo)
+    # print(sysinfo)
     if len(check_sys) > 0:
         for item in json.loads(check_sys[0]):
             # print(item)
