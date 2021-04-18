@@ -47,7 +47,7 @@ def getSyetemInfo():
         "grep 'model' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline().replace('\n', '')
 
     sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version, "os_machine": machine,
-               "os_processor": processor, "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
+               "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
                "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model,}
 
     return sysinfo
