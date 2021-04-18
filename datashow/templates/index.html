@@ -14,10 +14,9 @@
 <li>系统版本：{{result.os_release}}</li>
 <li>发行版本：{{result.os_version}}</li>
 <li>系统框架：{{result.os_machine}}</li>
-<li>操作系统：{{result.os_processor}}</li>
 <li>主机名：{{result.hostname}}</li>
 <li>IP地址：{{result.host_ip}}</li>
-<li>运行时间：{{result.uptime}}</li>
+<li>运行时间：{{result.uptime}} 天</li>
 <li>MAC地址：{{result.mac_address}}</li>
 <li>CPU核心数：{{result.cpu_num}}</li>
 <li>CPU型号名：{{result.cpu_modelname}}</li>
@@ -227,7 +226,7 @@
                 name: '磁盘已使用空间',
                 type: 'gauge',
                 detail: {formatter: '{value}%'},
-                data: [{value: {{disk_data.used_percent|slice:":-1"}}, name: '/分区磁盘已使用'}]
+                data: [{value: "{{disk_data.used_percent|slice:":-1"}}", name: '/分区磁盘已使用'}]
             }
         ]
     };

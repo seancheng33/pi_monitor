@@ -12,7 +12,7 @@
 - 
 
 ### 开发所使用的环境
-开发的语言python3.6.2
+开发的语言python
 使用到的插件
 
 Package               |Version
