@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图形化显示监控数据</title>
+    <script src="{% static 'echarts/echarts.min.js' %}"></script>
+    <script src="{% static 'axios.min.js' %}"></script>
+    <script src="{% static 'vue.js' %}"></script>
+    <script>
+    //一分钟刷新一次页面
+	window.onload=function(){
+	    setInterval(function () {
+		    window.location.reload();
+	    },60000);
+	}
+    </script>
+</head>
+<body>
+<li>操作系统：{{result.os_system}}</li>
+<li>节点名：{{result.os_node}}</li>
+<li>系统版本：{{result.os_release}}</li>
+<li>发行版本：{{result.os_version}}</li>
+<li>系统框架：{{result.os_machine}}</li>
+<li>主机名：{{result.hostname}}</li>
+<li>IP地址：{{result.host_ip}}</li>
+<li>运行时间：{{result.uptime}} 天</li>
+<li>MAC地址：{{result.mac_address}}</li>
+<li>CPU核心数：{{result.cpu_num}}</li>
+<li>CPU型号名：{{result.cpu_modelname}}</li>
+<li>CPU型号：{{result.cpu_model}}</li>
+
+<h4>物理内存使用情况</h4>
+<!--物理内存使用情况图标-->
+<div id="memory" style="width: 1000px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('memory'));
+    option = {
+        title: {
+            text: '物理内存使用情况',
+            subtext: '默认为显示30分钟内的数据'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['已用内存', '可用内存']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: [{% for item in memory_data %}"{{item.date}}",{% endfor %}]
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name: '已用内存',
+                type: 'line',
+                data: [{% for item in memory_data %}"{{item.mem_used|slice:":-1"}}",{% endfor %}],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name: '可用内存',
+                type: 'line',
+                data: [{% for item in memory_data %}"{{item.swap_free|slice:":-1"}}",{% endfor %}],
+                markPoint: {
+                    data: [
+                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                position: 'start',
+                                formatter: '最大值'
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+
+<h4>CPU使用情况</h4>
+<!--物理内存使用情况图标-->
+<div id="CPU" style="width: 1000px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('CPU'));
+    option = {
+        title: {
+            text: 'CPU使用情况',
+            subtext: '默认为显示30分钟内的数据'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['用户使用', '系统使用']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: [{% for item in cpu_data %}"{{item.date}}",{% endfor %}]
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name: '用户使用',
+                type: 'line',
+                data: [{% for item in cpu_data %}"{{item.cpu_user_precent|slice:":-1"}}",{% endfor %}],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name: '系统使用',
+                type: 'line',
+                data: [{% for item in cpu_data %}"{{item.cpu_sys_precent|slice:":-1"}}",{% endfor %}],
+                markPoint: {
+                    data: [
+                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                position: 'start',
+                                formatter: '最大值'
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+
+
+<h4>磁盘使用</h4>
+<!--磁盘使用情况图标-->
+<div id="harddisk" style="width: 600px;height:400px;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('harddisk'));
+
+    option = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '磁盘已使用空间',
+                type: 'gauge',
+                detail: {formatter: '{value}%'},
+                data: [{value: "{{disk_data.used_percent|slice:":-1"}}", name: '/分区磁盘已使用'}]
+            }
+        ]
+    };
+
+    setInterval(function () {
+        option.series[0].data[0].value = {{disk_data.used_percent|slice:":-1"}};
+        myChart.setOption(option, true);
+    },2000);
+
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>
