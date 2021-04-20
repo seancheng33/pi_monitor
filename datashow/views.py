@@ -44,7 +44,27 @@ def index(request):
     return render(request, "index.html", context)
 
 
-def charts(request):
+def cpu(request):
 
     context = {}
-    return render(request, "charts.html", context)
+    return render(request, "cpu.html", context)
+
+def memery(request):
+
+    context = {}
+    return render(request, "memery.html", context)
+
+def disk(request):
+
+    context = {}
+    return render(request, "disk.html", context)
+
+def config(request):
+
+    context = {}
+    return render(request, "config.html", context)
+
+def about(request):
+
+    context = {}
+    return render(request, "about.html", context)
