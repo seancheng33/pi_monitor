@@ -36,7 +36,7 @@
 
 		<!-- LOGO -->
         <div class="headerbar-left">
-			<a href="index.html" class="logo"><img alt="logo" src="assets/images/logo.png" /> <span>Admin</span></a>
+			<a href="index.html" class="logo"><img alt="logo" src="{% static 'assets/images/logo.png' %}" /> <span>RPI_monitor</span></a>
         </div>
 
         <nav class="navbar-custom">
@@ -135,7 +135,7 @@
                                 <!-- item-->
                                 <a href="#" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar2.png" alt="img" class="rounded-circle img-fluid">
+                                        <img src="{% static 'assets/images/avatars/avatar2.png' %}" alt="img" class="rounded-circle img-fluid">
                                     </div>
                                     <p class="notify-details">
                                         <b>John Doe</b>
@@ -147,7 +147,7 @@
                                 <!-- item-->
                                 <a href="#" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar3.png" alt="img" class="rounded-circle img-fluid">
+                                        <img src="{% static 'assets/images/avatars/avatar3.png' %}" alt="img" class="rounded-circle img-fluid">
                                     </div>
                                     <p class="notify-details">
                                         <b>Michael Cox</b>
@@ -159,7 +159,7 @@
                                 <!-- item-->
                                 <a href="#" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-faded">
-                                        <img src="assets/images/avatars/avatar4.png" alt="img" class="rounded-circle img-fluid">
+                                        <img src="{% static 'assets/images/avatars/avatar4.png' %}" alt="img" class="rounded-circle img-fluid">
                                     </div>
                                     <p class="notify-details">
                                         <b>Michelle Dolores</b>
@@ -178,7 +178,7 @@
 
                         <li class="list-inline-item dropdown notif">
                             <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
+                                <img src="{% static 'assets/images/avatars/admin.png' %}" alt="Profile image" class="avatar-rounded">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
@@ -229,114 +229,114 @@
 			<ul>
 
 					<li class="submenu">
-						<a href="index.html"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+						<a href="index.html"><i class="fa fa-fw fa-bars"></i><span> 首页仪表盘 </span> </a>
                     </li>
 
 					<li class="submenu">
-                        <a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> Charts </span> </a>
+                        <a href="charts.html"><i class="fa fa-fw fa-area-chart"></i><span> CPU使用详情 </span> </a>
                     </li>
 					
 					<li class="submenu">
-                        <a href="#"><i class="fa fa-fw fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="tables-basic.html">Basic Tables</a></li>
-								<li><a href="tables-datatable.html">Data Tables</a></li>
-							</ul>
+                        <a href="#"><i class="fa fa-fw fa-table"></i> <span> 内存使用详情 </span></a>
+<!--							<ul class="list-unstyled">-->
+<!--								<li><a href="tables-basic.html">Basic Tables</a></li>-->
+<!--								<li><a href="tables-datatable.html">Data Tables</a></li>-->
+<!--							</ul>-->
                     </li>
 										
                     <li class="submenu">
-                        <a href="#"><i class="fa fa-fw fa-tv"></i> <span> User Interface </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="ui-alerts.html">Alerts</a></li>
-                                <li><a href="ui-buttons.html">Buttons</a></li>
-                                <li><a href="ui-cards.html">Cards</a></li>
-                                <li><a href="ui-carousel.html">Carousel</a></li>
-                                <li><a href="ui-collapse.html">Collapse</a></li>
-                                <li><a href="ui-icons.html">Icons</a></li>
-                                <li><a href="ui-modals.html">Modals</a></li>
-                                <li><a href="ui-tooltips.html">Tooltips and Popovers</a></li>
-                            </ul>
+                        <a href="#"><i class="fa fa-fw fa-tv"></i> <span> 磁盘空间详情 </span></a>
+<!--                            <ul class="list-unstyled">-->
+<!--                                <li><a href="ui-alerts.html">Alerts</a></li>-->
+<!--                                <li><a href="ui-buttons.html">Buttons</a></li>-->
+<!--                                <li><a href="ui-cards.html">Cards</a></li>-->
+<!--                                <li><a href="ui-carousel.html">Carousel</a></li>-->
+<!--                                <li><a href="ui-collapse.html">Collapse</a></li>-->
+<!--                                <li><a href="ui-icons.html">Icons</a></li>-->
+<!--                                <li><a href="ui-modals.html">Modals</a></li>-->
+<!--                                <li><a href="ui-tooltips.html">Tooltips and Popovers</a></li>-->
+<!--                            </ul>-->
                     </li>
 
 					<li class="submenu">
-                        <a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="forms-general.html">General Elements</a></li>
-								<li><a href="forms-select2.html">Select2</a></li>
-                                <li><a href="forms-validation.html">Form Validation</a></li>
-                                <li><a href="forms-text-editor.html">Text Editors</a></li>
-								<li><a href="forms-upload.html">Multiple File Upload</a></li>
-								<li><a href="forms-datetime-picker.html">Date and Time Picker</a></li>
-								<li><a href="forms-color-picker.html">Color Picker</a></li>
-                            </ul>
+                        <a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span> 系统配置 </span></a>
+<!--                            <ul class="list-unstyled">-->
+<!--                                <li><a href="forms-general.html">General Elements</a></li>-->
+<!--								<li><a href="forms-select2.html">Select2</a></li>-->
+<!--                                <li><a href="forms-validation.html">Form Validation</a></li>-->
+<!--                                <li><a href="forms-text-editor.html">Text Editors</a></li>-->
+<!--								<li><a href="forms-upload.html">Multiple File Upload</a></li>-->
+<!--								<li><a href="forms-datetime-picker.html">Date and Time Picker</a></li>-->
+<!--								<li><a href="forms-color-picker.html">Color Picker</a></li>-->
+<!--                            </ul>-->
                     </li>
 					
                     <li class="submenu">
-						<a href="#"><i class="fa fa-fw fa-th"></i> <span> Plugins </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="star-rating.html">Star Rating</a></li>
-								<li><a href="range-sliders.html">Range Sliders</a></li>
-								<li><a href="tree-view.html">Tree View</a></li>
-								<li><a href="sweetalert.html">SweetAlert</a></li>
-								<li><a href="calendar.html">Calendar</a></li>
-								<li><a href="gmaps.html">GMaps</a></li>
-								<li><a href="counter-up.html">Counter-Up</a></li>
-                            </ul>
+						<a href="#"><i class="fa fa-fw fa-th"></i> <span> 关于本系统 </span></a>
+<!--                            <ul class="list-unstyled">-->
+<!--                                <li><a href="star-rating.html">Star Rating</a></li>-->
+<!--								<li><a href="range-sliders.html">Range Sliders</a></li>-->
+<!--								<li><a href="tree-view.html">Tree View</a></li>-->
+<!--								<li><a href="sweetalert.html">SweetAlert</a></li>-->
+<!--								<li><a href="calendar.html">Calendar</a></li>-->
+<!--								<li><a href="gmaps.html">GMaps</a></li>-->
+<!--								<li><a href="counter-up.html">Counter-Up</a></li>-->
+<!--                            </ul>-->
                     </li>
 
-					<li class="submenu">
-                        <a href="#"><i class="fa fa-fw fa-image"></i> <span> Images and Galleries </span> <span class="menu-arrow"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="media-fancybox.html"><span class="label radius-circle bg-danger float-right">cool</span> Fancybox </a></li>								
-								<li><a href="media-masonry.html">Masonry</a></li>
-								<li><a href="media-lightbox.html">Lightbox</a></li>
-								<li><a href="media-owl-carousel.html">Owl Carousel</a></li>
-								<li><a href="media-image-magnifier.html">Image Magnifier</a></li>
-								
-							</ul>
-                    </li>
-					
-                    <li class="submenu">
-                        <a href="#" class="active"><span class="label radius-circle bg-danger float-right">20</span><i class="fa fa-fw fa-copy"></i><span> Example Pages </span></a>
-                            <ul class="list-unstyled">								
-                                <li><a href="page-pricing-tables.html">Pricing Tables</a></li>
-                                <li><a target="_blank" href="page-coming-soon.html">Countdown</a></li>								
-                                <li><a href="page-invoice.html">Invoice</a></li>                        
-								<li><a href="page-login.html">Login / Register</a></li>								
-								<li class="active"><a href="page-blank.html">Blank Page</a></li>
-                            </ul>
-                    </li>
+<!--					<li class="submenu">-->
+<!--                        <a href="#"><i class="fa fa-fw fa-image"></i> <span> Images and Galleries </span> <span class="menu-arrow"></span></a>-->
+<!--							<ul class="list-unstyled">-->
+<!--								<li><a href="media-fancybox.html"><span class="label radius-circle bg-danger float-right">cool</span> Fancybox </a></li>								-->
+<!--								<li><a href="media-masonry.html">Masonry</a></li>-->
+<!--								<li><a href="media-lightbox.html">Lightbox</a></li>-->
+<!--								<li><a href="media-owl-carousel.html">Owl Carousel</a></li>-->
+<!--								<li><a href="media-image-magnifier.html">Image Magnifier</a></li>-->
+<!--								-->
+<!--							</ul>-->
+<!--                    </li>-->
+<!--					-->
+<!--                    <li class="submenu">-->
+<!--                        <a href="#" class="active"><span class="label radius-circle bg-danger float-right">20</span><i class="fa fa-fw fa-copy"></i><span> Example Pages </span></a>-->
+<!--                            <ul class="list-unstyled">								-->
+<!--                                <li><a href="page-pricing-tables.html">Pricing Tables</a></li>-->
+<!--                                <li><a target="_blank" href="page-coming-soon.html">Countdown</a></li>								-->
+<!--                                <li><a href="page-invoice.html">Invoice</a></li>                        -->
+<!--								<li><a href="page-login.html">Login / Register</a></li>								-->
+<!--								<li class="active"><a href="page-blank.html">Blank Page</a></li>-->
+<!--                            </ul>-->
+<!--                    </li>-->
 
-					<li class="submenu">
-                        <a href="#"><span class="label radius-circle bg-primary float-right">9</span><i class="fa fa-fw fa-indent"></i><span> Menu Levels </span></a>
-                            <ul>
-								<li>
-                                    <a href="#"><span>Second Level</span></a>
-                                </li>
-                                <li class="submenu">
-                                    <a href="#"><span>Third Level</span> <span class="menu-arrow"></span> </a>
-                                        <ul style="">
-                                            <li><a href="#"><span>Third Level Item</span></a></li>
-                                            <li><a href="#"><span>Third Level Item</span></a></li>
-                                        </ul>
-                                </li>                                
-                            </ul>
-                    </li>
+<!--					<li class="submenu">-->
+<!--                        <a href="#"><span class="label radius-circle bg-primary float-right">9</span><i class="fa fa-fw fa-indent"></i><span> Menu Levels </span></a>-->
+<!--                            <ul>-->
+<!--								<li>-->
+<!--                                    <a href="#"><span>Second Level</span></a>-->
+<!--                                </li>-->
+<!--                                <li class="submenu">-->
+<!--                                    <a href="#"><span>Third Level</span> <span class="menu-arrow"></span> </a>-->
+<!--                                        <ul style="">-->
+<!--                                            <li><a href="#"><span>Third Level Item</span></a></li>-->
+<!--                                            <li><a href="#"><span>Third Level Item</span></a></li>-->
+<!--                                        </ul>-->
+<!--                                </li>                                -->
+<!--                            </ul>-->
+<!--                    </li>-->
 
-					<li class="submenu">
-                        <a class="pro" href="#"><i class="fa fa-fw fa-star"></i><span> Pike Admin PRO </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">								
-                                <li><a target="_blank" href="#">Admin PRO features</a></li>
-								<li><a href="pro-settings.html">Settings</a></li>
-								<li><a href="pro-profile.html">My Profile</a></li>
-                                <li><a href="pro-users.html">Users</a></li>
-                                <li><a href="pro-articles.html">Articles</a></li>
-                                <li><a href="pro-categories.html">Categories</a></li>
-								<li><a href="pro-pages.html">Pages</a></li>								
-                                <li><a href="pro-contact-messages.html">Contact Messages</a></li>
-								<li><a href="pro-slider.html">Slider</a></li>
-                            </ul>
-                    </li>
+<!--					<li class="submenu">-->
+<!--                        <a class="pro" href="#"><i class="fa fa-fw fa-star"></i><span> Pike Admin PRO </span> <span class="menu-arrow"></span></a>-->
+<!--                            <ul class="list-unstyled">								-->
+<!--                                <li><a target="_blank" href="#">Admin PRO features</a></li>-->
+<!--								<li><a href="pro-settings.html">Settings</a></li>-->
+<!--								<li><a href="pro-profile.html">My Profile</a></li>-->
+<!--                                <li><a href="pro-users.html">Users</a></li>-->
+<!--                                <li><a href="pro-articles.html">Articles</a></li>-->
+<!--                                <li><a href="pro-categories.html">Categories</a></li>-->
+<!--								<li><a href="pro-pages.html">Pages</a></li>								-->
+<!--                                <li><a href="pro-contact-messages.html">Contact Messages</a></li>-->
+<!--								<li><a href="pro-slider.html">Slider</a></li>-->
+<!--                            </ul>-->
+<!--                    </li>-->
 					
             </ul>
 
@@ -351,7 +351,7 @@
 	</div>
 	<!-- End Sidebar -->
 
-
+{% block content %}
     <div class="content-page">
 	
 		<!-- Start content -->
@@ -391,10 +391,10 @@
 
     </div>
 	<!-- END content-page -->
-    
+    {% endblock content %}
 	<footer class="footer">
 		<span class="text-right">
-		Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+		Copyright &copy; 2021 seancheng 版权所有.
 		</span>
 		<span class="float-right">
 		
@@ -403,29 +403,6 @@
 
 </div>
 <!-- END main -->
-<script src="{% static 'assets/js/modernizr.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-<script src="{% static 'assets/js/moment.min.js' %}"></script>
-
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-
-<script src="{% static 'assets/js/detect.js' %}"></script>
-<script src="{% static 'assets/js/fastclick.js' %}"></script>
-<script src="{% static 'assets/js/jquery.blockUI.js' %}"></script>
-<script src="{% static 'assets/js/jquery.nicescroll.js' %}"></script>
-
-<!-- App js -->
-<script src="{% static 'assets/js/pikeadmin.js' %}"></script>
-
-<!-- BEGIN Java Script for this page -->
-<script src="{% static 'js/Chart.min.js' %}"></script>
-<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-
-<!-- Counter-Up-->
-<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>
-<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 </body>
 </html>

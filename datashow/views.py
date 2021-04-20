@@ -21,9 +21,10 @@ def index(request):
     memory_data = MemInfo.objects.filter(date__range=(start_date, end_date))
 
     # disk_data = DiskInfo.objects.filter(mount_point="/boot").order_by('-date').first()
-    # 获取挂载点信息，并去重，用于下面查询各个挂载点自己的信息
+    # 获取挂载点信息，并去重，用于下面查询各个挂载点自己的信息，
     disk_list = DiskInfo.objects.values('mount_point').distinct()
 
+    # 磁盘信息插入为一个list。方便在页面用for循环来获取。首页显示的数据，去最新的时间（-date，时间倒序）的第一条即可。
     disk_data = []
     for item in disk_list:
         m_point = item['mount_point']
@@ -35,7 +36,7 @@ def index(request):
     cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
     # print(cpu_data)
 
-    print(disk_data)
+    # print(disk_data)
     # for item in disk_data:
     #     print(item)
     context = {"result": result, "memory_data": memory_data, "disk_list": disk_list, "disk_data": disk_data, "cpu_data": cpu_data, }
