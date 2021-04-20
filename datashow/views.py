@@ -20,14 +20,30 @@ def index(request):
     # 这里获取的是内存的信息，使用的是时间范围。
     memory_data = MemInfo.objects.filter(date__range=(start_date, end_date))
 
-    disk_data = DiskInfo.objects.filter(mount_point="/").order_by('-date').first()
-    # print(disk_data)
+    # disk_data = DiskInfo.objects.filter(mount_point="/boot").order_by('-date').first()
+    # 获取挂载点信息，并去重，用于下面查询各个挂载点自己的信息
+    disk_list = DiskInfo.objects.values('mount_point').distinct()
+
+    disk_data = []
+    for item in disk_list:
+        m_point = item['mount_point']
+        disk_data.append(DiskInfo.objects.filter(mount_point=m_point).order_by('-date').first())
+        # print(m_point)
+
+
+    # 这里获取的是内存的信息，使用的是时间范围。
     cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
     # print(cpu_data)
 
-    # print(disk_data)
+    print(disk_data)
     # for item in disk_data:
-    #     print(item.used_percent,item.mount_point)
-    context = {"result": result, "memory_data": memory_data, "disk_data": disk_data, "cpu_data": cpu_data, }
+    #     print(item)
+    context = {"result": result, "memory_data": memory_data, "disk_list": disk_list, "disk_data": disk_data, "cpu_data": cpu_data, }
 
     return render(request, "index.html", context)
+
+
+def charts(request):
+
+    context = {}
+    return render(request, "charts.html", context)
