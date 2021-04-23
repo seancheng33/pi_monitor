@@ -45,8 +45,20 @@ def index(request):
 
 
 def cpu(request):
+    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+    now_time = datetime.now()
 
-    context = {}
+    start_date = now_time - timedelta(minutes=29, seconds=59)
+    end_date = now_time
+
+    # 这里获取的是内存的信息，使用的是时间范围。
+    cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
+
+    all_data = CPUInfo.objects.all().order_by('-date')
+
+
+
+    context = {"cpu_data":cpu_data,"all_data":all_data[:20]}
     return render(request, "cpu.html", context)
 
 def memery(request):
@@ -66,5 +78,5 @@ def config(request):
 
 def about(request):
 
-    context = {}
+    context = {'title':"关于本程序的title"}
     return render(request, "about.html", context)
