@@ -8,7 +8,7 @@
 		<title>RPI_monitor</title>
 		<meta name="description" content="">
 
-
+        {% block head %}
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
 
@@ -24,6 +24,8 @@
 		<!-- BEGIN CSS for this page -->
 		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/dataTables.bootstrap4.min.css' %}"/>
 		<!-- END CSS for this page -->
+        {% endblock head %}
+
 
 </head>
 
@@ -308,20 +310,8 @@
 
 </div>
 <!-- END main -->
+{% block script}
 
-<script src="{% static 'assets/js/modernizr.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-<script src="{% static 'assets/js/moment.min.js' %}"></script>
-
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-
-<script src="{% static 'assets/js/detect.js' %}"></script>
-<script src="{% static 'assets/js/fastclick.js' %}"></script>
-<script src="{% static 'assets/js/jquery.blockUI.js' %}"></script>
-<script src="{% static 'assets/js/jquery.nicescroll.js' %}"></script>
-
-<!-- App js -->
-<script src="{% static 'assets/js/pikeadmin.js' %}"></script>
+{% endblock script}
 </body>
 </html>

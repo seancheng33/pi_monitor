@@ -1,6 +1,33 @@
 {% extends "basic.html" %}
 {% load static %}
 
+{% block head %}
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+
+		<!-- Bootstrap CSS -->
+		<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- Font Awesome CSS -->
+		<link href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- Custom CSS -->
+		<link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- BEGIN CSS for this page -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+		<style>
+		td.details-control {
+		background: url('assets/plugins/datatables/img/details_open.png') no-repeat center center;
+		cursor: pointer;
+		}
+		tr.shown td.details-control {
+		background: url('assets/plugins/datatables/img/details_close.png') no-repeat center center;
+		}
+		</style>
+		<!-- END CSS for this page -->
+{% endblock head %}
+
 {% block content %}
 <div class="content-page">
 
@@ -40,6 +67,7 @@
                 </div>
             </div>
             <!-- end row -->
+
             <div class="row">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -193,6 +221,10 @@
 </div>
 <!-- END content-page -->
 
+{% endblock content %}
+
+
+{% block script}
 <script src="{% static 'assets/js/modernizr.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/moment.min.js' %}"></script>
@@ -214,12 +246,12 @@
 <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 
 <!-- Counter-Up-->
-<!--<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>-->
-<!--<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>-->
+<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 <script>
-	var ctx1 = document.getElementById("lineChart").getContext('2d');
-	var lineChart = new Chart(ctx1, {
+	var ctx = document.getElementById("lineChart").getContext('2d');
+	var lineChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
 			labels: [{% for item in cpu_data %}"{{item.date}}",{% endfor %}],
@@ -253,4 +285,4 @@
 
 </script>
 <!-- END Java Script for this page -->
-{% endblock %}
+{% endblock script}

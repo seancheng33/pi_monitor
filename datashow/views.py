@@ -2,6 +2,7 @@ import json
 import time
 from datetime import datetime, timedelta
 
+from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.shortcuts import render
 from api.models import *
 
@@ -11,11 +12,11 @@ def index(request):
     # 因为这里我是要做单机的，所以这个我只取最后的数据
     result = MechineInfo.objects.last()
 
-    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的10分钟内
     now_time = datetime.now()
 
     # start_date = now_time - timedelta(hours=23, minutes=59, seconds=59)
-    start_date = now_time - timedelta(minutes=29, seconds=59)
+    start_date = now_time - timedelta(minutes=9, seconds=59)
     end_date = now_time
     # 这里获取的是内存的信息，使用的是时间范围。
     memory_data = MemInfo.objects.filter(date__range=(start_date, end_date))
@@ -58,7 +59,7 @@ def cpu(request):
 
 
 
-    context = {"cpu_data":cpu_data,"all_data":all_data[:20]}
+    context = {"cpu_data":cpu_data,"all_data":all_data[:200]}
     return render(request, "cpu.html", context)
 
 def memory(request):
@@ -71,10 +72,9 @@ def memory(request):
 
     # 这里获取的是内存的信息，使用的是时间范围。
     mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+    mem_all = MemInfo.objects.all().order_by('-date')
 
-    all_data = MemInfo.objects.all().order_by('-date')
-
-    context = {"mem_data":mem_data,"all_data":all_data[:20]}
+    context = {"mem_data":mem_data,"mem_all":mem_all[:200]}
     return render(request, "memory.html", context)
 
 def disk(request):
@@ -91,3 +91,19 @@ def about(request):
 
     context = {'title':"关于本程序的title"}
     return render(request, "about.html", context)
+
+
+def test(request):
+
+    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+    now_time = datetime.now()
+
+    start_date = now_time - timedelta(minutes=29, seconds=59)
+    end_date = now_time
+
+    # 这里获取的是内存的信息，使用的是时间范围。
+    mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+    mem_all = MemInfo.objects.all().order_by('-date')
+
+    context = {"mem_data":mem_data,"mem_all":mem_all[:500]}
+    return render(request, "tables-datatable.html", context)

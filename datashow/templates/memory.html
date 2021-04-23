@@ -1,6 +1,33 @@
 {% extends "basic.html" %}
 {% load static %}
 
+{% block head %}
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+
+		<!-- Bootstrap CSS -->
+		<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- Font Awesome CSS -->
+		<link href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- Custom CSS -->
+		<link href="{% static 'assets/css/style.css' %}" rel="stylesheet" type="text/css" />
+
+		<!-- BEGIN CSS for this page -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+		<style>
+		td.details-control {
+		background: url('assets/plugins/datatables/img/details_open.png') no-repeat center center;
+		cursor: pointer;
+		}
+		tr.shown td.details-control {
+		background: url('assets/plugins/datatables/img/details_close.png') no-repeat center center;
+		}
+		</style>
+		<!-- END CSS for this page -->
+{% endblock head %}
+
 {% block content %}
  <div class="content-page">
 
@@ -53,23 +80,6 @@
                             <div class="table-responsive">
                                 <div id="example1_wrapper"
                                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dataTables_length" id="example1_length"><label>Show <select
-                                                    name="example1_length" aria-controls="example1"
-                                                    class="form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div id="example1_filter" class="dataTables_filter"><label>Search:<input
-                                                    type="search" class="form-control form-control-sm" placeholder=""
-                                                    aria-controls="example1"></label></div>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <table id="example1"
@@ -131,7 +141,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {% for item in all_data %}
+                                                {% for item in mem_all %}
                                                 <tr>
                                                 <td>{{item.date}}</td>
                                                 <td>{{item.mem_used}}</td>
@@ -147,57 +157,6 @@
                                                 {% endfor %}
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-5">
-                                            <div class="dataTables_info" id="example1_info" role="status"
-                                                 aria-live="polite">Showing 1 to 10 of 45 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="example1_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button page-item previous disabled"
-                                                        id="example1_previous"><a href="#" aria-controls="example1"
-                                                                                  data-dt-idx="0" tabindex="0"
-                                                                                  class="page-link">Previous</a></li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                                                                    aria-controls="example1"
-                                                                                                    data-dt-idx="1"
-                                                                                                    tabindex="0"
-                                                                                                    class="page-link">1</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="example1"
-                                                                                              data-dt-idx="2"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">2</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="example1"
-                                                                                              data-dt-idx="3"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">3</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="example1"
-                                                                                              data-dt-idx="4"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">4</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                                                              aria-controls="example1"
-                                                                                              data-dt-idx="5"
-                                                                                              tabindex="0"
-                                                                                              class="page-link">5</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item next" id="example1_next"><a
-                                                            href="#" aria-controls="example1" data-dt-idx="6"
-                                                            tabindex="0" class="page-link">Next</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +176,9 @@
 
 </div>
 <!-- END content-page -->
+{% endblock content %}
 
+{% block script}
 <script src="{% static 'assets/js/modernizr.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/moment.min.js' %}"></script>
@@ -243,13 +204,16 @@
 <script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 <script>
-
-
+	// START CODE FOR BASIC DATA TABLE
+	$(document).ready(function() {
+		$('#example1').DataTable();
+	} );
+	// END CODE FOR BASIC DATA TABLE
 </script>
 
 <script>
-	var ctx2 = document.getElementById("lineChart").getContext('2d');
-	var lineChart = new Chart(ctx2, {
+	var ctx = document.getElementById("lineChart").getContext('2d');
+	var lineChart = new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels: [{% for item in mem_data %}"{{item.date}}",{% endfor %}],
@@ -282,5 +246,6 @@
 	});
 
 </script>
+
 <!-- END Java Script for this page -->
-{% endblock %}
+{% endblock script}
