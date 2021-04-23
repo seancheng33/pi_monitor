@@ -2,50 +2,49 @@
 {% load static %}
 
 {% block content %}
-<div class="content-page">
+ <div class="content-page">
 
-    <!-- Start content -->
-    <div class="content">
+        <!-- Start content -->
+        <div class="content">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="breadcrumb-holder">
-                        <h1 class="main-title float-left">CPU使用详情</h1>
-                        <ol class="breadcrumb float-right">
-                            <li class="breadcrumb-item">首页</li>
-                            <li class="breadcrumb-item active">CPU使用详情</li>
-                        </ol>
-                        <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="breadcrumb-holder">
+                            <h1 class="main-title float-left">内存使用详情</h1>
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item">首页</li>
+                                <li class="breadcrumb-item active">内存使用详情</li>
+                            </ol>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- end row -->
+                <!-- end row -->
+                                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h3><i class="fa fa-line-chart"></i> 内存使用情况</h3>
+                                显示最近的30分钟内的内存已用和可用的情况
+                            </div>
 
-            <div class="row">
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h3><i class="fa fa-line-chart"></i> CPU使用情况</h3>
-                            显示最近的30分钟内的CPU使用情况，分别两个数值为用户使用的百分比和系统使用的百分比
-                        </div>
-
-                        <div class="card-body">
-                            <canvas id="lineChart"></canvas>
-                        </div>
-                        <div class="card-footer small text-muted">最后更新时间 {{ memory_data.date }}</div>
-                    </div><!-- end card-->
+                            <div class="card-body">
+                                <canvas id="lineChart"></canvas>
+                            </div>
+                            <div class="card-footer small text-muted">最后更新时间 {{ mem_data.date }}</div>
+                        </div><!-- end card-->
+                    </div>
                 </div>
-            </div>
-            <!-- end row -->
+                <!-- end row -->
+
             <div class="row">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="card mb-3">
                         <div class="card-header">
-                            <h3><i class="fa fa-table"></i> CPU数据明细表</h3>
+                            <h3><i class="fa fa-table"></i> 内存数据明细表</h3>
                             分页详细的线上每个时段获取到的使用情况，维度分为5个，分别是用户、系统该事件的使用率百分比，还有就是1分钟、5分钟、
                             15分钟的使用负载
                         </div>
@@ -86,27 +85,48 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Position: activate to sort column ascending"
-                                                        style="width: 163px;">用户使用百分比
+                                                        style="width: 163px;">已使用内存
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
-                                                        style="width: 62px;">系统使用百分比
+                                                        style="width: 62px;">可用内存
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Age: activate to sort column ascending"
-                                                        style="width: 27px;">1分钟负载
+                                                        style="width: 27px;">内存总数
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 62px;">5分钟负载
+                                                        style="width: 62px;">mem_shared
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Salary: activate to sort column ascending"
-                                                        style="width: 52px;">15分钟负载
+                                                        style="width: 52px;">mem_buff
+                                                    </th>
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 62px;">mem_available
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Age: activate to sort column ascending"
+                                                        style="width: 27px;">swap_total
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Start date: activate to sort column ascending"
+                                                        style="width: 62px;">swap_used
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Salary: activate to sort column ascending"
+                                                        style="width: 52px;">swap_free
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -114,11 +134,15 @@
                                                 {% for item in all_data %}
                                                 <tr>
                                                 <td>{{item.date}}</td>
-                                                <td>{{item.cpu_user_precent}}</td>
-                                                <td>{{item.cpu_sys_precent}}</td>
-                                                <td>{{item.cpu_load_averages1}}</td>
-                                                <td>{{item.cpu_load_averages5}}</td>
-                                                <td>{{item.cpu_load_averages1}}</td>
+                                                <td>{{item.mem_used}}</td>
+                                                <td>{{item.mem_free}}</td>
+                                                <td>{{item.mem_total}}</td>
+                                                <td>{{item.mem_shared}}</td>
+                                                <td>{{item.mem_buff}}</td>
+                                                <td>{{item.mem_available}}</td>
+                                                <td>{{item.swap_total}}</td>
+                                                <td>{{item.swap_used}}</td>
+                                                <td>{{item.swap_free}}</td>
                                                 </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -184,6 +208,7 @@
                 </div>
             </div>
 
+
         </div>
         <!-- END container-fluid -->
 
@@ -214,23 +239,28 @@
 <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 
 <!-- Counter-Up-->
-<!--<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>-->
-<!--<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>-->
+<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 <script>
-	var ctx1 = document.getElementById("lineChart").getContext('2d');
-	var lineChart = new Chart(ctx1, {
-		type: 'bar',
+
+
+</script>
+
+<script>
+	var ctx2 = document.getElementById("lineChart").getContext('2d');
+	var lineChart = new Chart(ctx2, {
+		type: 'line',
 		data: {
-			labels: [{% for item in cpu_data %}"{{item.date}}",{% endfor %}],
+			labels: [{% for item in mem_data %}"{{item.date}}",{% endfor %}],
 			datasets: [{
-					label: '用户使用',
-					backgroundColor: '#DD0F20',
-					data: [{% for item in cpu_data %}"{{item.cpu_user_precent|slice:":-1"}}",{% endfor %}]
+					label: '已用内存',
+					backgroundColor: '#3EB9DC',
+					data: [{% for item in mem_data %}"{{item.mem_used|slice:":-1"}}",{% endfor %}]
 				}, {
-					label: '系统使用',
-					backgroundColor: '#F18A31',
-					data: [{% for item in cpu_data %}"{{item.cpu_sys_precent|slice:":-1"}}",{% endfor %}]
+					label: '可用内存',
+					backgroundColor: '#EBEFF3',
+					data: [{% for item in mem_data %}"{{item.mem_free|slice:":-1"}}",{% endfor %}]
 				}]
 
 		},

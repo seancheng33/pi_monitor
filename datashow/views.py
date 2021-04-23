@@ -61,10 +61,21 @@ def cpu(request):
     context = {"cpu_data":cpu_data,"all_data":all_data[:20]}
     return render(request, "cpu.html", context)
 
-def memery(request):
+def memory(request):
 
-    context = {}
-    return render(request, "memery.html", context)
+    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+    now_time = datetime.now()
+
+    start_date = now_time - timedelta(minutes=29, seconds=59)
+    end_date = now_time
+
+    # 这里获取的是内存的信息，使用的是时间范围。
+    mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+
+    all_data = MemInfo.objects.all().order_by('-date')
+
+    context = {"mem_data":mem_data,"all_data":all_data[:20]}
+    return render(request, "memory.html", context)
 
 def disk(request):
 
