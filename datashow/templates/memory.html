@@ -72,8 +72,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <h3><i class="fa fa-table"></i> 内存数据明细表</h3>
-                            分页详细的线上每个时段获取到的使用情况，维度分为5个，分别是用户、系统该事件的使用率百分比，还有就是1分钟、5分钟、
-                            15分钟的使用负载
+                            分页详细的数据以最新的64条数据为默认显示，显示了包括物理内存，缓冲区和交换空间的数据。
                         </div>
 
                         <div class="card-body">
@@ -87,15 +86,15 @@
                                                    role="grid" aria-describedby="example1_info">
                                                 <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
+                                                    <th class="sorting_desc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="descending"
+                                                        aria-label="Start date: activate to sort column ascending"
                                                         style="width: 88px;">时间
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Position: activate to sort column ascending"
-                                                        style="width: 163px;">已使用内存
+                                                        style="width: 62px;">已使用内存
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
@@ -105,38 +104,38 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Age: activate to sort column ascending"
-                                                        style="width: 27px;">内存总数
+                                                        style="width: 62px;">内存总数
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 62px;">mem_shared
+                                                        style="width: 62px;">共享内存
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Salary: activate to sort column ascending"
-                                                        style="width: 52px;">mem_buff
+                                                        style="width: 62px;">未使用缓存
                                                     </th>
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Office: activate to sort column ascending"
-                                                        style="width: 62px;">mem_available
+                                                        style="width: 62px;">可用缓冲区
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Age: activate to sort column ascending"
-                                                        style="width: 27px;">swap_total
+                                                        style="width: 62px;">交换空间总数
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 62px;">swap_used
+                                                        style="width: 62px;">交换空间已使用
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
                                                         aria-label="Salary: activate to sort column ascending"
-                                                        style="width: 52px;">swap_free
+                                                        style="width: 62px;">交换空间未使用
                                                     </th>
                                                 </tr>
                                                 </thead>
