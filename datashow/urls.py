@@ -18,5 +18,5 @@ urlpatterns = [
     path('disk.html', views.disk, name='disk'),
     path('config.html', views.config, name='config'),
     path('about.html', views.about, name='about'),
-    path('test.html', views.test, name='test'),
+    # path('test.html', views.test, name='test'),
 ]

@@ -24,216 +24,89 @@
                 <!-- end row -->
 
                 <div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+									<div class="card mb-3">
+										<div class="card-header">
+											<h3><i class="fa fa-table"></i> 系统的基本信息</h3>
+											这里显示被获取信息的系统的一些基本信息，例如：
+										</div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h3><i class="fa fa-line-chart"></i> CPU使用情况</h3>
-                                显示最近的30分钟内的CPU使用情况，分别两个数值为用户使用的百分比和系统使用的百分比
-                            </div>
+										<div class="card-body">
 
-                            <div class="card-body">
-                                <canvas id="lineChart"></canvas>
-                            </div>
-                            <div class="card-footer small text-muted">最后更新时间 {{ memory_data.date }}</div>
-                        </div><!-- end card-->
-                    </div>
+											<table class="table table-responsive-xl table-striped">
+											  <thead>
+												<tr>
+												  <th scope="col">序号</th>
+												  <th scope="col">系统项名</th>
+												  <th scope="col">项目值</th>
+												</tr>
+											  </thead>
+											  <tbody>
+												<tr>
+												  <th scope="row">1</th>
+												  <td>操作系统</td>
+												  <td>{{ result.os_system }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">2</th>
+												  <td>节点名</td>
+												  <td>{{ result.os_node }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">3</th>
+												  <td>内核版本</td>
+												  <td>{{ result.os_release }}</td>
+												</tr>
+                                                <th scope="row">4</th>
+												  <td>内核版本</td>
+												  <td>{{ result.os_version }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">5</th>
+												  <td>操作系统</td>
+												  <td>{{ result.os_machine }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">6</th>
+												  <td>主机名</td>
+												  <td>{{ result.hostname }}</td>
+												</tr>
+                                                <th scope="row">7</th>
+												  <td>主机IP</td>
+												  <td>{{ result.host_ip }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">8</th>
+												  <td>系统已启动时间（天）</td>
+												  <td>{{ result.uptime }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">9</th>
+												  <td>主机MAC地址</td>
+												  <td>{{ result.mac_address }}</td>
+												</tr>
+                                                <th scope="row">10</th>
+												  <td>CPU核心数</td>
+												  <td>{{ result.cpu_num }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">11</th>
+												  <td>CPU架构名</td>
+												  <td>{{ result.cpu_modelname }}</td>
+												</tr>
+												<tr>
+												  <th scope="row">12</th>
+												  <td>CPU架构</td>
+												  <td>{{ result.cpu_model }}</td>
+												</tr>
+											  </tbody>
+											</table>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h3><i class="fa fa-line-chart"></i> 内存使用情况</h3>
-                                显示最近的30分钟内的内存已用和可用的情况
-                            </div>
+										</div>
+									</div><!-- end card-->
+								</div>
 
-                            <div class="card-body">
-                                <canvas id="lineChart2"></canvas>
-                            </div>
-                            <div class="card-footer small text-muted">最后更新时间 {{ memory_data.date }}</div>
-                        </div><!-- end card-->
-                    </div>
-                </div>
-                <!-- end row -->
-
-
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h3><i class="fa fa-users"></i> Staff details</h3>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non luctus metus.
-                                Vivamus fermentum ultricies orci sit amet sollicitudin.
-                            </div>
-
-                            <div class="card-body">
-
-                                <table id="example1"
-                                       class="table table-bordered table-responsive-xl table-hover display">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012/08/06</td>
-                                        <td>$137,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rhona Davidson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Tokyo</td>
-                                        <td>55</td>
-                                        <td>2010/10/14</td>
-                                        <td>$327,900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Colleen Hurst</td>
-                                        <td>Javascript Developer</td>
-                                        <td>San Francisco</td>
-                                        <td>39</td>
-                                        <td>2009/09/15</td>
-                                        <td>$205,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sonya Frost</td>
-                                        <td>Software Engineer</td>
-                                        <td>Edinburgh</td>
-                                        <td>23</td>
-                                        <td>2008/12/13</td>
-                                        <td>$103,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jena Gaines</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>30</td>
-                                        <td>2008/12/19</td>
-                                        <td>$90,560</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Quinn Flynn</td>
-                                        <td>Support Lead</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2013/03/03</td>
-                                        <td>$342,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fiona Green</td>
-                                        <td>Chief Operating Officer (COO)</td>
-                                        <td>San Francisco</td>
-                                        <td>48</td>
-                                        <td>2010/03/11</td>
-                                        <td>$850,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shou Itou</td>
-                                        <td>Regional Marketing</td>
-                                        <td>Tokyo</td>
-                                        <td>20</td>
-                                        <td>2011/08/14</td>
-                                        <td>$163,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonas Alexander</td>
-                                        <td>Developer</td>
-                                        <td>San Francisco</td>
-                                        <td>30</td>
-                                        <td>2010/07/14</td>
-                                        <td>$86,500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shad Decker</td>
-                                        <td>Regional Director</td>
-                                        <td>Edinburgh</td>
-                                        <td>51</td>
-                                        <td>2008/11/13</td>
-                                        <td>$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Michael Bruce</td>
-                                        <td>Javascript Developer</td>
-                                        <td>Singapore</td>
-                                        <td>29</td>
-                                        <td>2011/06/27</td>
-                                        <td>$183,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Donna Snider</td>
-                                        <td>Customer Support</td>
-                                        <td>New York</td>
-                                        <td>27</td>
-                                        <td>2011/01/25</td>
-                                        <td>$112,000</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div><!-- end card-->
-                    </div>
-
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                         <div class="card mb-3">
                             <div class="card-header">
                                 <h3><i class="fa fa-star-o"></i> 硬盘使用情况</h3>
@@ -255,130 +128,46 @@
                                 <div class="m-b-20"></div>
                                 {% endfor %}
                             </div>
-                        <div class="card-footer small text-muted">查看更多</div>
+                        <div class="card-footer small text-muted"><a href="disk.html">查看更多数据</a></div>
                     </div><!-- end card-->
                 </div>
-
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-3">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h3><i class="fa fa-envelope-o"></i> Latest messages</h3>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="widget-messages nicescroll" style="height: 400px;">
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar2.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">John Doe</p>
-                                        <p class="message-item-msg">Hello. I want to buy your product</p>
-                                        <p class="message-item-date">11:50 PM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar5.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Ashton Cox</p>
-                                        <p class="message-item-msg">Great job for this task</p>
-                                        <p class="message-item-date">14:25 PM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar6.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Colleen Hurst</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">13:20 PM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar10.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Fiona Green</p>
-                                        <p class="message-item-msg">Nice to meet you</p>
-                                        <p class="message-item-date">15:45 PM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar2.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Donna Snider</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar5.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Garrett Winters</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar6.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Herrod Chandler</p>
-                                        <p class="message-item-msg">Hello! I'm available for this job</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar10.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Jena Gaines</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar2.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Airi Satou</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-item">
-                                        <div class="message-user-img"><img
-                                                src="{% static 'assets/images/avatars/avatar10.png' %}"
-                                                class="avatar-circle" alt=""></div>
-                                        <p class="message-item-user">Brielle Williamson</p>
-                                        <p class="message-item-msg">I have a new project for you</p>
-                                        <p class="message-item-date">15:45 AM</p>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                        <div class="card-footer small text-muted">Updated today at 11:59 PM</div>
-                    </div><!-- end card-->
-                </div>
-
             </div>
 
+                </div>
+
+
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h3><i class="fa fa-line-chart"></i> CPU使用情况</h3>
+                                显示最近的30分钟内的CPU使用情况，分别两个数值为用户使用的百分比和系统使用的百分比
+                            </div>
+
+                            <div class="card-body">
+                                <canvas id="lineChart"></canvas>
+                            </div>
+                            <div class="card-footer small text-muted"><a href="cpu.html">查看更多数据</a></div>
+                        </div><!-- end card-->
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h3><i class="fa fa-line-chart"></i> 内存使用情况</h3>
+                                显示最近的30分钟内的内存已用和可用的情况
+                            </div>
+
+                            <div class="card-body">
+                                <canvas id="lineChart2"></canvas>
+                            </div>
+                            <div class="card-footer small text-muted"><a href="memory.html">查看更多数据</a></div>
+                        </div><!-- end card-->
+                    </div>
+                </div>
+                <!-- end row -->
 
         </div>
         <!-- END container-fluid -->

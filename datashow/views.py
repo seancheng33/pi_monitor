@@ -2,12 +2,14 @@ import json
 import time
 from datetime import datetime, timedelta
 
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.shortcuts import render
 from api.models import *
 
 
 # Create your views here.
+# @login_required
 def index(request):
     # 因为这里我是要做单机的，所以这个我只取最后的数据
     result = MechineInfo.objects.last()
@@ -30,21 +32,15 @@ def index(request):
     for item in disk_list:
         m_point = item['mount_point']
         disk_data.append(DiskInfo.objects.filter(mount_point=m_point).order_by('-date').first())
-        # print(m_point)
-
 
     # 这里获取的是内存的信息，使用的是时间范围。
     cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
-    # print(cpu_data)
 
-    # print(disk_data)
-    # for item in disk_data:
-    #     print(item)
     context = {"result": result, "memory_data": memory_data, "disk_list": disk_list, "disk_data": disk_data, "cpu_data": cpu_data, }
 
     return render(request, "index.html", context)
 
-
+# @login_required
 def cpu(request):
     # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
     now_time = datetime.now()
@@ -54,14 +50,13 @@ def cpu(request):
 
     # 这里获取的是内存的信息，使用的是时间范围。
     cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
-
     all_data = CPUInfo.objects.all().order_by('-date')
 
 
 
-    context = {"cpu_data":cpu_data,"all_data":all_data[:200]}
+    context = {"cpu_data":cpu_data,"all_data":all_data[:640]}
     return render(request, "cpu.html", context)
-
+# @login_required
 def memory(request):
 
     # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
@@ -74,36 +69,36 @@ def memory(request):
     mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
     mem_all = MemInfo.objects.all().order_by('-date')
 
-    context = {"mem_data":mem_data,"mem_all":mem_all[:200]}
+    context = {"mem_data":mem_data,"mem_all":mem_all[:640]}
     return render(request, "memory.html", context)
-
+# @login_required
 def disk(request):
 
     context = {}
     return render(request, "disk.html", context)
-
+# @login_required
 def config(request):
 
     context = {}
     return render(request, "config.html", context)
-
+# @login_required
 def about(request):
 
     context = {'title':"关于本程序的title"}
     return render(request, "about.html", context)
 
 
-def test(request):
-
-    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
-    now_time = datetime.now()
-
-    start_date = now_time - timedelta(minutes=29, seconds=59)
-    end_date = now_time
-
-    # 这里获取的是内存的信息，使用的是时间范围。
-    mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
-    mem_all = MemInfo.objects.all().order_by('-date')
-
-    context = {"mem_data":mem_data,"mem_all":mem_all[:500]}
-    return render(request, "tables-datatable.html", context)
+# def test(request):
+#
+#     # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+#     now_time = datetime.now()
+#
+#     start_date = now_time - timedelta(minutes=29, seconds=59)
+#     end_date = now_time
+#
+#     # 这里获取的是内存的信息，使用的是时间范围。
+#     mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+#     mem_all = MemInfo.objects.all().order_by('-date')
+#
+#     context = {"mem_data":mem_data,"mem_all":mem_all[:500]}
+#     return render(request, "tables-datatable.html", context)
