@@ -24,7 +24,8 @@ def getSyetemInfo():
 
     # 通过socket模块获取hostname和ip地址。但是可能存在ip地址非内网地址的情况
     hostname = socket.gethostname()
-    host_ip = socket.gethostbyname(hostname)
+    # host_ip = socket.gethostbyname(hostname)
+    host_ip = os.popen("ip a|grep eth0|grep inet|awk '{print $2}'").readline().replace('\n', '')
     # 获取mac地址，这个办法在虚拟机的ubuntu中是出现有误，但是在其他真机的测试中暂时没有发现有误。
     mac = uuid.uuid1().hex
     # 最后12位就是mac的内容，将其取出，然后全部小写改为大写。
@@ -115,6 +116,21 @@ def getDiskInfo():
     return all_disk_info
 
 
+# 获取登录失败的数据信息
+def getLastb():
+    lastb = os.popen("lastb|grep -v btmp").readlines()
+    all_lastb_info = []
+    for item in lastb:
+        n_item = item.replace('\n', '').split('   ')
+        for ite2 in n_item:
+            print(ite2.replace(' ',''))
+        print('-------------')
+        # all_lastb_info.append(item)
+
+
+
+
+
 if __name__ == '__main__':
 
     # 获取系统的信息
@@ -129,10 +145,10 @@ if __name__ == '__main__':
             if item.get('mac_address') == eval(sysinfo)['mac_address']:
                 # 获取系统信息数据的pk值，用于到时更新数据时使用。
                 pk = item.get('pk')
-                # print(sysinfo)
+                # print("1"+sysinfo)
                 os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://127.0.0.1:8000/api/mechineinfo/"+str(pk)+"/").readlines()
     else:
-        # print(sysinfo)
+        # print("2"+sysinfo)
         os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://127.0.0.1:8000/api/mechineinfo/").readlines()
 
     # 获取内存的信息
