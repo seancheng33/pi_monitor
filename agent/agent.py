@@ -122,13 +122,24 @@ def getLastb():
     all_lastb_info = []
     for item in lastb:
         n_item = item.replace('\n', '').split('   ')
-        for ite2 in n_item:
-            print(ite2.replace(' ',''))
-        print('-------------')
-        # all_lastb_info.append(item)
+#         print(n_item)
+#        print(type(n_item))
+        last_item ={}
+        if len(n_item) == 4 :
+            last_item['fail_name']=n_item[0]
+            last_item['terminal']=n_item[1].replace(' ','')
+            last_item['fail_ip']=n_item[2].replace(' ','')
+            last_item['date']=n_item[3][1:]
+        elif len(n_item) == 3 :
+            last_item['fail_name']=n_item[0].split(' ')[0]
+            last_item['terminal']=n_item[0].split(' ')[1]
+            last_item['fail_ip']=n_item[1].replace(' ','')
+            last_item['date']=n_item[2][1:]
+        else:
+            continue
 
-
-
+        all_lastb_info.append(last_item)
+    return all_lastb_info
 
 
 if __name__ == '__main__':
@@ -168,3 +179,9 @@ if __name__ == '__main__':
     cpuinfo = json.dumps(getCPUInfo())
     # print(cpuinfo)
     os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://127.0.0.1:8000/api/cpuinfo/").readlines()
+
+    #
+    lastbinfo = getLastb()
+    for item in lastbinfo:
+        info = json.dumps(item)
+        os.popen("curl -H 'content-type: application/json' -d '" + str(info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()

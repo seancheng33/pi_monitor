@@ -17,7 +17,7 @@ class MemInfoSerrializers(serializers.ModelSerializer):
 class LoginFailedSerrializers(serializers.ModelSerializer):
     class Meta:
         model = LoginFailed
-        fields = ('pk', 'date', 'fail_name', 'fail_ip',)
+        fields = ('pk', 'fail_name', 'teraminal', 'fail_ip', 'date',)
 
 class DiskInfoSerrializers(serializers.ModelSerializer):
     class Meta:

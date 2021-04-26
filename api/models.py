@@ -37,10 +37,10 @@ class MemInfo(models.Model):
         return '%d:%s' % (self.pk, self.mem_used)
 
 class LoginFailed(models.Model):
-
-    date = models.DateTimeField(default=timezone.now)
-    fail_name = models.CharField(max_length=50, default="")
+    fail_name = models.CharField(max_length=10, default="")
+    teraminal = models.CharField(max_length=10, default="")
     fail_ip = models.CharField(max_length=50, default="")
+    date = models.CharField(max_length=60, default="")
 
     def __unicode__(self):
         return '%d:%s' % (self.pk, self.fail_ip)
