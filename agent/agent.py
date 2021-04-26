@@ -4,6 +4,7 @@
 @CreateTime   : 2021/1/8
 @Program      : 利用os模块，使用系统本身的shell命令，采集各种数据。
 '''
+import datetime
 import os
 import json
 import platform
@@ -180,8 +181,21 @@ if __name__ == '__main__':
     # print(cpuinfo)
     os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://127.0.0.1:8000/api/cpuinfo/").readlines()
 
-    #
+
+    # 获取登录失败的信息
     lastbinfo = getLastb()
-    for item in lastbinfo:
-        info = json.dumps(item)
-        os.popen("curl -H 'content-type: application/json' -d '" + str(info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()
+
+    # 获取四个时间，用于写入登录失败的信息用的。
+    # 首先直接获取一个明天的日期数，用今天的日期加1天，就是明天的日期了。
+    tomorrow = datetime.date.today()+datetime.timedelta(days=1)
+    # 下面的三个时间，一个是开始的时间范围，一个是结束的时间范围，一个是当前时间。
+    s_time = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59:30', '%Y-%m-%d%H:%M:%S')
+    e_time = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59:59', '%Y-%m-%d%H:%M:%S')
+    now_time = datetime.datetime.now()
+
+    # 两个判断，一个是判断明天的日期是不是等于1日，一个是当前的时间是否是在23点59分30秒到59秒之间。tomorrow后面点day就是只显示日期，就可以直接和数字1做比对了。
+    # 因为脚本的运行时间是10秒一次，所以，30-59秒之间的话，是在40秒之后会运行一次。从而实现了只在每个月的最后一天的最后一次运行采集lastb的数据。
+    if tomorrow.day == 1 and (s_time < now_time and now_time < e_time):
+        for item in lastbinfo:
+            info = json.dumps(item)
+            os.popen("curl -H 'content-type: application/json' -d '" + str(info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()

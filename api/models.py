@@ -38,7 +38,7 @@ class MemInfo(models.Model):
 
 class LoginFailed(models.Model):
     fail_name = models.CharField(max_length=10, default="")
-    teraminal = models.CharField(max_length=10, default="")
+    terminal = models.CharField(max_length=10, default="")
     fail_ip = models.CharField(max_length=50, default="")
     date = models.CharField(max_length=60, default="")
 

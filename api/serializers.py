@@ -17,17 +17,20 @@ class MemInfoSerrializers(serializers.ModelSerializer):
 class LoginFailedSerrializers(serializers.ModelSerializer):
     class Meta:
         model = LoginFailed
-        fields = ('pk', 'fail_name', 'teraminal', 'fail_ip', 'date',)
+        fields = ('pk', 'fail_name', 'terminal', 'fail_ip', 'date',)
+
 
 class DiskInfoSerrializers(serializers.ModelSerializer):
     class Meta:
         model = DiskInfo
         fields = ('pk', 'date', 'mount_point', 'disk_type', 'disk_total', 'disk_used', 'disk_available', 'used_percent',)
 
+
 class MechineInfoSerrializers(serializers.ModelSerializer):
     class Meta:
         model = MechineInfo
         fields = ('pk', 'os_system', 'os_node', 'os_release', 'os_version', 'os_machine', 'hostname', 'host_ip', 'uptime', 'mac_address','cpu_num','cpu_modelname','cpu_model',)
+
 
 class CPUInfoSerrializers(serializers.ModelSerializer):
     class Meta:
