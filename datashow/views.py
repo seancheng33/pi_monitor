@@ -1,9 +1,6 @@
-import json
-import time
 from datetime import datetime, timedelta
 
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, EmptyPage
 from django.shortcuts import render
 from api.models import *
 
@@ -46,16 +43,18 @@ def cpu(request):
     now_time = datetime.now()
 
     start_date = now_time - timedelta(minutes=29, seconds=59)
+    start_date2 = now_time - timedelta(hours=1, minutes=59, seconds=59)
     end_date = now_time
 
     # 这里获取的是内存的信息，使用的是时间范围。
     cpu_data = CPUInfo.objects.filter(date__range=(start_date, end_date))
-    all_data = CPUInfo.objects.all().order_by('-date')
+    all_data = CPUInfo.objects.filter(date__range=(start_date2, end_date))
 
 
 
     context = {"cpu_data":cpu_data,"all_data":all_data[:640]}
     return render(request, "cpu.html", context)
+
 # @login_required
 def memory(request):
 
@@ -63,19 +62,38 @@ def memory(request):
     now_time = datetime.now()
 
     start_date = now_time - timedelta(minutes=29, seconds=59)
+    start_date2 = now_time - timedelta(hours=1, minutes=59, seconds=59)
     end_date = now_time
 
     # 这里获取的是内存的信息，使用的是时间范围。
     mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
-    mem_all = MemInfo.objects.all().order_by('-date')
+    mem_all = MemInfo.objects.filter(date__range=(start_date2, end_date))
 
-    context = {"mem_data":mem_data,"mem_all":mem_all[:640]}
+    context = {"mem_data": mem_data, "mem_all": mem_all}
     return render(request, "memory.html", context)
+
 # @login_required
 def disk(request):
 
     context = {}
     return render(request, "disk.html", context)
+
+def lastb(request):
+    # 获取当前的总登陆失败的数据总量
+    failed_count = LoginFailed.objects.count()
+
+    all_fail_name = LoginFailed.objects.values('fail_name').distinct()
+    total_name_num = LoginFailed.objects.values('fail_name').distinct().count()
+    # print(all_fail_name)
+    all_fail_ip = LoginFailed.objects.values('fail_ip').distinct()
+    total_ip_num = LoginFailed.objects.values('fail_ip').distinct().count()
+    # print(all_fail_ip)
+
+
+    context = {'count': failed_count,'total_ip_num':total_ip_num,'total_name_num':total_name_num}
+    return render(request, "lastb.html", context)
+
+
 # @login_required
 def config(request):
 

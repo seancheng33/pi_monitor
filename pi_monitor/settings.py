@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 我自己的应用
     'rest_framework',   # 这个rest的应用需要是在api的前面
-    'django_crontab',   # 服务端定时任务的插件
+    # 'django_crontab',   # 服务端定时任务的插件
     'api',
     'datashow',
 ]

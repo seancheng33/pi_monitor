@@ -16,6 +16,7 @@ urlpatterns = [
     path('cpu.html', views.cpu, name='cpu'),
     path('memory.html', views.memory, name='memory'),
     path('disk.html', views.disk, name='disk'),
+    path('lastb.html', views.lastb, name='lastb'),
     path('config.html', views.config, name='config'),
     path('about.html', views.about, name='about'),
     # path('test.html', views.test, name='test'),

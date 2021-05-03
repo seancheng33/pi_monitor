@@ -1,0 +1,107 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block content %}
+ <div class="content-page">
+
+        <!-- Start content -->
+        <div class="content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="breadcrumb-holder">
+                            <h1 class="main-title float-left">系统登陆失败</h1>
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item">首页</li>
+                                <li class="breadcrumb-item active">系统登陆失败</li>
+                            </ol>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+
+
+                <div class="row">
+									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+											<div class="card-box noradius noborder bg-default">
+													<i class="fa fa-file-text-o float-right text-white"></i>
+													<h6 class="text-white text-uppercase m-b-20">登陆失败总数</h6>
+													<h1 class="m-b-20 text-white counter">{{ count }}</h1>
+													<span class="text-white">数据截止至上个月</span>
+											</div>
+									</div>
+
+									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+											<div class="card-box noradius noborder bg-warning">
+													<i class="fa fa-bar-chart float-right text-white"></i>
+													<h6 class="text-white text-uppercase m-b-20">登陆失败IP总数</h6>
+													<h1 class="m-b-20 text-white counter">{{ total_ip_num }}</h1>
+													<span class="text-white">数据截止至上个月</span>
+											</div>
+									</div>
+
+									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+											<div class="card-box noradius noborder bg-info">
+													<i class="fa fa-user-o float-right text-white"></i>
+													<h6 class="text-white text-uppercase m-b-20">登陆失败用户总数</h6>
+													<h1 class="m-b-20 text-white counter">{{total_name_num}}</h1>
+													<span class="text-white">数据截止至上个月</span>
+											</div>
+									</div>
+
+									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+											<div class="card-box noradius noborder bg-danger">
+													<i class="fa fa-bell-o float-right text-white"></i>
+													<h6 class="text-white text-uppercase m-b-20">Alerts</h6>
+													<h1 class="m-b-20 text-white counter">58</h1>
+													<span class="text-white">5 New Alerts</span>
+											</div>
+									</div>
+                </div>
+							<!-- end row -->
+
+
+
+        </div>
+        <!-- END container-fluid -->
+
+    </div>
+    <!-- END content -->
+
+</div>
+<!-- END content-page -->
+
+<script src="{% static 'assets/js/modernizr.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/moment.min.js' %}"></script>
+
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'assets/js/detect.js' %}"></script>
+<script src="{% static 'assets/js/fastclick.js' %}"></script>
+<script src="{% static 'assets/js/jquery.blockUI.js' %}"></script>
+<script src="{% static 'assets/js/jquery.nicescroll.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'assets/js/pikeadmin.js' %}"></script>
+
+<!-- BEGIN Java Script for this page -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+<!-- Counter-Up-->
+<script src="{% static 'assets/plugins/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
+
+<script>
+
+
+</script>
+<!-- END Java Script for this page -->
+{% endblock %}
