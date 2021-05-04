@@ -56,14 +56,77 @@
 									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 											<div class="card-box noradius noborder bg-danger">
 													<i class="fa fa-bell-o float-right text-white"></i>
-													<h6 class="text-white text-uppercase m-b-20">Alerts</h6>
-													<h1 class="m-b-20 text-white counter">58</h1>
-													<span class="text-white">5 New Alerts</span>
+													<h6 class="text-white text-uppercase m-b-20">本月登录失败总数</h6>
+													<h1 class="m-b-20 text-white counter">{{db_num}}</h1>
+													<span class="text-white">本月的数据</span>
 											</div>
 									</div>
                 </div>
 							<!-- end row -->
 
+
+				            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fa fa-table"></i> 本月登录失败明细</h3>
+                            显示当前月份到目前为止，btmp中记录的所有登录失败的记录。
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="example1_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="example1"
+                                                   class="table table-bordered table-hover display dataTable no-footer"
+                                                   role="grid" aria-describedby="example1_info">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_desc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="descending"
+                                                        aria-label="Start date: activate to sort column ascending"
+                                                        style="width: 88px;">时间
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 62px;">IP
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 62px;">终端
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Age: activate to sort column ascending"
+                                                        style="width: 62px;">用户名
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for item in lastb_list %}
+                                                <tr>
+                                                <td>{{item.time}}</td>
+                                                <td>{{item.ip}}</td>
+                                                <td>{{item.terminal}}</td>
+                                                <td>{{item.name}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- end card-->
+                </div>
+            </div>
 
 
         </div>
@@ -100,8 +163,11 @@
 <script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 <script>
-
-
+	// START CODE FOR BASIC DATA TABLE
+	$(document).ready(function() {
+		$('#example1').DataTable();
+	} );
+	// END CODE FOR BASIC DATA TABLE
 </script>
 <!-- END Java Script for this page -->
 {% endblock %}

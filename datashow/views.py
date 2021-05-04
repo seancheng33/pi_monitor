@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from api.models import *
+import redis
 
 
 # Create your views here.
@@ -89,8 +90,23 @@ def lastb(request):
     total_ip_num = LoginFailed.objects.values('fail_ip').distinct().count()
     # print(all_fail_ip)
 
+    # redis信息的获取
+    pool = redis.ConnectionPool(host='192.168.1.90', port=6379, db=1, password='test123456', decode_responses=True)
+    r = redis.Redis(connection_pool=pool)
+    # 获取该库的数据总数
+    db_num = r.dbsize()
+    lastb_list = []
+    for i in range(0, db_num):
+        tmp = {}
+        item = r.lrange('failed' + str(i), 0, 3)
+        tmp['time'] = item[0]
+        tmp['ip'] = item[1]
+        tmp['terminal'] = item[2]
+        tmp['name'] = item[3]
+        lastb_list.append(tmp)
+    print(lastb_list)
 
-    context = {'count': failed_count,'total_ip_num':total_ip_num,'total_name_num':total_name_num}
+    context = {'count': failed_count, 'total_ip_num':total_ip_num, 'total_name_num':total_name_num, 'db_num':db_num, 'lastb_list':lastb_list}
     return render(request, "lastb.html", context)
 
 
