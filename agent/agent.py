@@ -13,6 +13,7 @@ import uuid
 import re
 import redis
 
+
 # 获取系统的信息内容。
 def getSyetemInfo():
     # 使用python自己的模块来获取系统的信息，比如操作系统的名称、节点名（hostname）、版本号、等等
@@ -47,9 +48,10 @@ def getSyetemInfo():
     cpu_model = os.popen(
         "grep 'model' /proc/cpuinfo|awk -F ': ' '{print $2}'").readline().replace('\n', '')
 
-    sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version, "os_machine": machine,
+    sysinfo = {"os_system": system, "os_node": node, "os_release": release, "os_version": version,
+               "os_machine": machine,
                "hostname": hostname, "host_ip": host_ip, "mac_address": mac_address,
-               "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model,}
+               "uptime": uptime, "cpu_num": cpu_num, "cpu_modelname": cpu_modelname, "cpu_model": cpu_model, }
 
     return sysinfo
 
@@ -78,6 +80,7 @@ def getMemoryInfo():
 
     return meminfo
 
+
 # 获取CPU的用户使用量百分比，系统使用量百分比，一分钟负载，五分钟负载，十五分钟负载
 def getCPUInfo():
     # 这里的执行top命令要加一个-b的参数，否则的话，会有问题，报错“  top: failed tty get 错误”。导致cpu的内容无法获取并写入。
@@ -97,10 +100,14 @@ def getCPUInfo():
     cpu_load_averages15 = os.popen(
         "uptime|awk -F 'load average:' '{print $2}'|awk -F ',' '{print $3}'").readline()
 
-    cpuinfo = {"cpu_user_precent":cpu_user_precent.replace('\n', ''), "cpu_sys_precent":cpu_sys_precent.replace('\n', ''), "cpu_load_averages1":cpu_load_averages1.replace('\n', ''),
-          "cpu_load_averages5":cpu_load_averages5.replace('\n', ''), "cpu_load_averages15":cpu_load_averages15.replace('\n', '')}
+    cpuinfo = {"cpu_user_precent": cpu_user_precent.replace('\n', ''),
+               "cpu_sys_precent": cpu_sys_precent.replace('\n', ''),
+               "cpu_load_averages1": cpu_load_averages1.replace('\n', ''),
+               "cpu_load_averages5": cpu_load_averages5.replace('\n', ''),
+               "cpu_load_averages15": cpu_load_averages15.replace('\n', '')}
 
     return cpuinfo
+
 
 # 获取磁盘的空间信息，由于服务器可能挂载多个数据盘，所以需要获取多个分区和挂载点的信息
 def getDiskInfo():
@@ -124,19 +131,19 @@ def getLastb():
     all_lastb_info = []
     for item in lastb:
         n_item = item.replace('\n', '').split('   ')
-#         print(n_item)
-#        print(type(n_item))
-        last_item ={}
-        if len(n_item) == 4 :
-            last_item['fail_name']=n_item[0]
-            last_item['terminal']=n_item[1].replace(' ','')
-            last_item['fail_ip']=n_item[2].replace(' ','')
-            last_item['date']=n_item[3].lstrip()    # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
-        elif len(n_item) == 3 :
-            last_item['fail_name']=n_item[0].split(' ')[0]
-            last_item['terminal']=n_item[0].split(' ')[1]
-            last_item['fail_ip']=n_item[1].replace(' ','')
-            last_item['date']=n_item[2].lstrip()    # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
+        #         print(n_item)
+        #        print(type(n_item))
+        last_item = {}
+        if len(n_item) == 4:
+            last_item['fail_name'] = n_item[0]
+            last_item['terminal'] = n_item[1].replace(' ', '')
+            last_item['fail_ip'] = n_item[2].replace(' ', '')
+            last_item['date'] = n_item[3].lstrip()  # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
+        elif len(n_item) == 3:
+            last_item['fail_name'] = n_item[0].split(' ')[0]
+            last_item['terminal'] = n_item[0].split(' ')[1]
+            last_item['fail_ip'] = n_item[1].replace(' ', '')
+            last_item['date'] = n_item[2].lstrip()  # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
         else:
             continue
 
@@ -170,9 +177,8 @@ def getLastbNow():
         # print(last_item)
         for item2 in last_item:
             r.lpush('failed' + str(i), item2)
-        #print(r.lrange('failed' + str(i), 0, 3))
+        # print(r.lrange('failed' + str(i), 0, 3))
         i += 1
-
 
 
 if __name__ == '__main__':
@@ -190,36 +196,40 @@ if __name__ == '__main__':
                 # 获取系统信息数据的pk值，用于到时更新数据时使用。
                 pk = item.get('pk')
                 # print("1"+sysinfo)
-                os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X put http://127.0.0.1:8000/api/mechineinfo/"+str(pk)+"/").readlines()
+                os.popen("curl -H 'content-type: application/json' -d '" + str(
+                    sysinfo) + "' -X put http://127.0.0.1:8000/api/mechineinfo/" + str(pk) + "/").readlines()
     else:
         # print("2"+sysinfo)
-        os.popen("curl -H 'content-type: application/json' -d '"+str(sysinfo)+"' -X post http://127.0.0.1:8000/api/mechineinfo/").readlines()
+        os.popen("curl -H 'content-type: application/json' -d '" + str(
+            sysinfo) + "' -X post http://127.0.0.1:8000/api/mechineinfo/").readlines()
 
     # 获取内存的信息
     meminfo = json.dumps(getMemoryInfo())
     # print(meminfo)
-    os.popen("curl -H 'content-type: application/json' -d '"+str(meminfo)+"' -X post http://127.0.0.1:8000/api/meminfo/").readlines()
+    os.popen("curl -H 'content-type: application/json' -d '" + str(
+        meminfo) + "' -X post http://127.0.0.1:8000/api/meminfo/").readlines()
 
     # 获取磁盘的信息
     diskinfo = getDiskInfo()
     # print(diskinfo)
     # 因为磁盘信息传出来的是一个list，所以需要遍历数据，把每一个都拿出来。
     for item in diskinfo:
-       # list里面的元素在函数中拼接的时候是字典，这里需要转成json的格式传给接口，不然接口会接收不到数据
-       info = json.dumps(item)
-       os.popen("curl -H 'content-type: application/json' -d '"+str(info)+"' -X post http://127.0.0.1:8000/api/diskinfo/").readlines()
+        # list里面的元素在函数中拼接的时候是字典，这里需要转成json的格式传给接口，不然接口会接收不到数据
+        info = json.dumps(item)
+        os.popen("curl -H 'content-type: application/json' -d '" + str(
+            info) + "' -X post http://127.0.0.1:8000/api/diskinfo/").readlines()
 
     cpuinfo = json.dumps(getCPUInfo())
     # print(cpuinfo)
-    os.popen("curl -H 'content-type: application/json' -d '"+str(cpuinfo)+"' -X post http://127.0.0.1:8000/api/cpuinfo/").readlines()
-
+    os.popen("curl -H 'content-type: application/json' -d '" + str(
+        cpuinfo) + "' -X post http://127.0.0.1:8000/api/cpuinfo/").readlines()
 
     # 获取登录失败的信息
     lastbinfo = getLastb()
 
     # 获取四个时间，用于写入登录失败的信息用的。
     # 首先直接获取一个明天的日期数，用今天的日期加1天，就是明天的日期了。
-    tomorrow = datetime.date.today()+datetime.timedelta(days=1)
+    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
     # 下面的三个时间，一个是开始的时间范围，一个是结束的时间范围，一个是当前时间。
     s_time = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59:30', '%Y-%m-%d%H:%M:%S')
     e_time = datetime.datetime.strptime(str(datetime.datetime.now().date()) + '23:59:59', '%Y-%m-%d%H:%M:%S')
@@ -230,7 +240,8 @@ if __name__ == '__main__':
     if tomorrow.day == 1 and (s_time < now_time and now_time < e_time):
         for item in lastbinfo:
             info = json.dumps(item)
-            os.popen("curl -H 'content-type: application/json' -d '" + str(info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()
+            os.popen("curl -H 'content-type: application/json' -d '" + str(
+                info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()
 
     # 获取实时登录失败的数据信息
     getLastbNow()

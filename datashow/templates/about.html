@@ -24,21 +24,67 @@
                 <!-- end row -->
 
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h3><i class="fa fa-line-chart"></i> 内存使用情况</h3>
-                                显示最近的30分钟内的内存已用和可用的情况
-                            </div>
+<div class="row">
 
-                            <div class="card-body">
-                                <p></p>
-                            </div>
-                            <div class="card-footer small text-muted">最后更新时间</div>
-                        </div><!-- end card-->
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<div class="card mb-3">
+							<div class="card-header">
+								<h3><i class="fa fa-heart-o"></i> 关于本系统</h3>
+								这是一个获取树莓派或raspbian系统的系统信息的数据采集和展示的一个系统，本系统agent基于python程序和
+                                第三方包来实现信息的获取。
+							</div>
+
+							<div class="card-body">
+
+								<div class="alert alert-success" role="alert">
+								  <h4 class="alert-heading">Well done!</h4>
+								  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+								  <hr>
+								  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+								</div>
+
+							</div>
+						</div><!-- end card-->
                     </div>
-                </div>
+
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<div class="card mb-3">
+							<div class="card-header">
+								<h3><i class="fa fa-commenting-o"></i> 系统版本及更新进度</h3>
+								当前系统版本：0.9</a>
+							</div>
+
+							<div class="card-body">
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年5月4日：</strong> 发现agent获取lastb用切片[1:]存在问题，改为lstrip去掉左边的空格。
+                                    准备添加一个redis的功能，用于显示当前实时的lastb里面的信息。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年5月3日：</strong> 添加登陆失败数据显示页面及逻辑。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年4月26日：</strong> agent添加获取登录失败的信息的功能，并且添加了获取的时间范围。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年4月25日：</strong> 完成了首页的初稿,修改agent的机器获取，并添加关于lastb的获取内容。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年4月23日：</strong> 构建CPU、内存使用详情的页面。修改首页的数据图表为显示10分钟的内容，
+                                    详细页为30分钟及默认显示640条数据。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年4月20日：</strong> 添加展示的页面及确定了页面的数量。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年4月19日：</strong> 开始美化数据展示的页面。
+								</div>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								  <strong>2021年04月18日：</strong> agent的小错误修复。并且添加两个shell脚本，用于后台运行django和agent。<br />
+                                    调整显示规则，由原来的24小时的数据调整为显示30分钟的数据
+								</div>
+							</div>
+						</div><!-- end card-->
+                    </div>
                 <!-- end row -->
 
         </div>

@@ -90,7 +90,7 @@ def lastb(request):
     total_ip_num = LoginFailed.objects.values('fail_ip').distinct().count()
     # print(all_fail_ip)
 
-    # redis信息的获取
+    # 连接redis库，获取redis中的一些高频信息
     pool = redis.ConnectionPool(host='192.168.1.90', port=6379, db=1, password='test123456', decode_responses=True)
     r = redis.Redis(connection_pool=pool)
     # 获取该库的数据总数
@@ -106,7 +106,8 @@ def lastb(request):
         lastb_list.append(tmp)
     print(lastb_list)
 
-    context = {'count': failed_count, 'total_ip_num':total_ip_num, 'total_name_num':total_name_num, 'db_num':db_num, 'lastb_list':lastb_list}
+    context = {'count': failed_count, 'total_ip_num': total_ip_num, 'total_name_num': total_name_num, 'db_num': db_num,
+               'lastb_list': lastb_list}
     return render(request, "lastb.html", context)
 
 
