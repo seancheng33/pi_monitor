@@ -130,12 +130,12 @@ def getLastb():
             last_item['fail_name']=n_item[0]
             last_item['terminal']=n_item[1].replace(' ','')
             last_item['fail_ip']=n_item[2].replace(' ','')
-            last_item['date']=n_item[3][1:]
+            last_item['date']=n_item[3].lstrip()    # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
         elif len(n_item) == 3 :
             last_item['fail_name']=n_item[0].split(' ')[0]
             last_item['terminal']=n_item[0].split(' ')[1]
             last_item['fail_ip']=n_item[1].replace(' ','')
-            last_item['date']=n_item[2][1:]
+            last_item['date']=n_item[2].lstrip()    # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
         else:
             continue
 
