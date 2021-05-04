@@ -11,6 +11,7 @@ import platform
 import socket
 import uuid
 import re
+import redis
 
 # 获取系统的信息内容。
 def getSyetemInfo():
@@ -143,6 +144,37 @@ def getLastb():
     return all_lastb_info
 
 
+# 与上面的有时间判断不同，这个会随着每次执行，获取到lastb中显示的数据，并且是存到redis里面，
+# 数据的存储和检查速度比存在mysql里面的要快，且不是每个月获取一次的问题。
+def getLastbNow():
+    r_pool = redis.ConnectionPool(host='192.168.1.90', port=6379, db=1, password='test123456', decode_responses=True)
+    r = redis.Redis(connection_pool=r_pool)
+
+    lastb = os.popen("lastb|grep -v btmp").readlines()
+    i = 0
+    for item in lastb:
+        n_item = item.replace('\n', '').split('   ')
+        last_item = []
+        if len(n_item) == 4:
+            last_item.append(n_item[0])
+            last_item.append(n_item[1].replace(' ', ''))
+            last_item.append(n_item[2].replace(' ', ''))
+            last_item.append(n_item[3].lstrip())
+        elif len(n_item) == 3:
+            last_item.append(n_item[0].split(' ')[0])
+            last_item.append(n_item[0].split(' ')[1])
+            last_item.append(n_item[1].replace(' ', ''))
+            last_item.append(n_item[2].lstrip())
+        else:
+            continue
+        # print(last_item)
+        for item2 in last_item:
+            r.lpush('failed' + str(i), item2)
+        #print(r.lrange('failed' + str(i), 0, 3))
+        i += 1
+
+
+
 if __name__ == '__main__':
 
     # 获取系统的信息
@@ -199,3 +231,6 @@ if __name__ == '__main__':
         for item in lastbinfo:
             info = json.dumps(item)
             os.popen("curl -H 'content-type: application/json' -d '" + str(info) + "' -X post http://127.0.0.1:8000/api/loginfailed/").readlines()
+
+    # 获取实时登录失败的数据信息
+    getLastbNow()
