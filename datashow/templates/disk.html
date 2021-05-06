@@ -12,16 +12,34 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="breadcrumb-holder">
-                            <h1 class="main-title float-left">仪表盘</h1>
+                            <h1 class="main-title float-left">磁盘使用情况</h1>
                             <ol class="breadcrumb float-right">
                                 <li class="breadcrumb-item">首页</li>
-                                <li class="breadcrumb-item active">仪表盘</li>
+                                <li class="breadcrumb-item active">磁盘使用情况</li>
                             </ol>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
                 <!-- end row -->
+
+
+					<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+								<div class="card mb-3">
+									<div class="card-header">
+										<i class="fa fa-table"></i> 各挂载磁盘使用情况(单位：%)
+									</div>
+
+									<div class="card-body">
+										<canvas id="polarAreaChart"></canvas>
+									</div>
+									<div class="card-footer small text-muted">雷达数据为实时数据</div>
+								</div><!-- end card-->
+							</div>
+
+					</div>
+					<!-- end row -->
 
 
 
@@ -59,8 +77,20 @@
 <script src="{% static 'assets/plugins/counterup/jquery.counterup.min.js' %}"></script>
 
 <script>
+// polarAreaChart
+	var ctx6 = document.getElementById("polarAreaChart").getContext('2d');
+	var doughnutChart = new Chart(ctx6, {
+		type: 'polarArea',
+		data: {
+			labels: [{% for item in disk_data %}"{{ item.mount_point }}",{% endfor %}],
+			datasets: [{
+				label: "My First Dataset",
+				data: [{% for item in disk_data %}"{{ item.used_percent|slice:":-1" }}",{% endfor %}],
+				backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]
+				}]
+		}
 
-
+	});
 </script>
 <!-- END Java Script for this page -->
 {% endblock %}

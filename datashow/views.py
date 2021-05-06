@@ -76,7 +76,16 @@ def memory(request):
 # @login_required
 def disk(request):
 
-    context = {}
+    # 获取挂载点信息，并去重，用于下面查询各个挂载点自己的信息，
+    disk_list = DiskInfo.objects.values('mount_point').distinct()
+
+    # 磁盘信息插入为一个list。方便在页面用for循环来获取。首页显示的数据，去最新的时间（-date，时间倒序）的第一条即可。
+    disk_data = []
+    for item in disk_list:
+        m_point = item['mount_point']
+        disk_data.append(DiskInfo.objects.filter(mount_point=m_point).order_by('-date').first())
+
+    context = {'disk_list': disk_list, 'disk_data': disk_data}
     return render(request, "disk.html", context)
 
 def lastb(request):
