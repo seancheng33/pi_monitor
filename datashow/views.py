@@ -113,7 +113,7 @@ def lastb(request):
         tmp['terminal'] = item[2]
         tmp['name'] = item[3]
         lastb_list.append(tmp)
-    print(lastb_list)
+    # print(lastb_list)
 
     context = {'count': failed_count, 'total_ip_num': total_ip_num, 'total_name_num': total_name_num, 'db_num': db_num,
                'lastb_list': lastb_list}
@@ -125,10 +125,11 @@ def config(request):
 
     context = {}
     return render(request, "config.html", context)
+
 # @login_required
 def about(request):
 
-    context = {'title':"关于本程序的title"}
+    context = {'title': "关于本程序的title"}
     return render(request, "about.html", context)
 
 

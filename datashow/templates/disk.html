@@ -38,8 +38,43 @@
 								</div><!-- end card-->
 							</div>
 
+								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+									<div class="card mb-3">
+										<div class="card-header">
+											<h3><i class="fa fa-table"></i> 磁盘挂载概况</h3>
+											显示各个挂载点的使用概况。
+										</div>
+
+										<div class="card-body">
+
+											<table class="table table-responsive-xl table-hover">
+											  <thead>
+												<tr>
+												  <th scope="col">#</th>
+												  <th scope="col">挂载点</th>
+												  <th scope="col">已使用百分比</th>
+												  <th scope="col">磁盘空间总量</th>
+												</tr>
+											  </thead>
+											  <tbody>
+                                              {% for item in disk_data %}
+												<tr>
+												  <th scope="row"><a role="button" href="#" class="btn btn-primary"><i class="fa fa-info"></i></a></th>
+												  <td>{{ item.mount_point }}</td>
+												  <td>{{ item.used_percent }}</td>
+												  <td>{{ item.disk_total }}</td>
+												</tr>
+                                              {% endfor %}
+											  </tbody>
+											</table>
+
+										</div>
+									</div><!-- end card-->
+								</div>
+
 					</div>
 					<!-- end row -->
+
 
 
 
@@ -78,15 +113,15 @@
 
 <script>
 // polarAreaChart
-	var ctx6 = document.getElementById("polarAreaChart").getContext('2d');
-	var doughnutChart = new Chart(ctx6, {
+	var ctx = document.getElementById("polarAreaChart").getContext('2d');
+	var doughnutChart = new Chart(ctx, {
 		type: 'polarArea',
 		data: {
 			labels: [{% for item in disk_data %}"{{ item.mount_point }}",{% endfor %}],
 			datasets: [{
-				label: "My First Dataset",
+				label: "磁盘使用概况",
 				data: [{% for item in disk_data %}"{{ item.used_percent|slice:":-1" }}",{% endfor %}],
-				backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]
+				backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)","rgb(255, 159, 64)"]
 				}]
 		}
 
