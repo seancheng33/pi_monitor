@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 我自己的应用
     'rest_framework',   # 这个rest的应用需要是在api的前面
-    # 'django_crontab',   # 服务端定时任务的插件
     'api',
     'datashow',
 ]
@@ -73,15 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -96,15 +86,6 @@ DATABASES = {
         },
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': None
-#     }
-# }
-# from mongoengine import *
-# # authentication_source='admin'是必须的。不然会报错Authentication failed
-# connect('test', host='192.168.1.89', port=27017, username='admin', password='123456', authentication_source='admin')
 
 
 # Password validation

@@ -133,17 +133,17 @@ def about(request):
     return render(request, "about.html", context)
 
 
-# def test(request):
-#
-#     # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
-#     now_time = datetime.now()
-#
-#     start_date = now_time - timedelta(minutes=29, seconds=59)
-#     end_date = now_time
-#
-#     # 这里获取的是内存的信息，使用的是时间范围。
-#     mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
-#     mem_all = MemInfo.objects.all().order_by('-date')
-#
-#     context = {"mem_data":mem_data,"mem_all":mem_all[:500]}
-#     return render(request, "tables-datatable.html", context)
+def test(request):
+
+    # 获取当前的时间，用于获取数据时的时间范围用，设定的开始时间和结束时间为当前时间的24小时内
+    now_time = datetime.now()
+
+    start_date = now_time - timedelta(minutes=29, seconds=59)
+    end_date = now_time
+
+    # 这里获取的是内存的信息，使用的是时间范围。
+    mem_data = MemInfo.objects.filter(date__range=(start_date, end_date))
+    mem_all = MemInfo.objects.all().order_by('-date')
+
+    context = {"mem_data":mem_data,"mem_all":mem_all[:500]}
+    return render(request, "login.html", context)

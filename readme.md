@@ -12,7 +12,14 @@
 - 目前的测试情况，agent是针对respbain系统而言，对于针对其他系统，目前的agent收集的信息会出现错误。
 
 ### 开发所使用的环境
-开发的语言python
+开发的系统：raspbain x86
+
+开发的语言：python 3.x
+
+开发工具：pycharm
+
+使用到的数据库中间件： mysql5.7.28、redis4.0.12
+
 使用到的插件
 
 Package               |Version
@@ -21,12 +28,14 @@ asgiref               |3.3.1
 Django                |3.1.5
 django-rest-framework |0.1.0
 djangorestframework   |3.12.2
-mongoengine           |0.22.1
 pip                   |20.3.3
 pytz                  |2020.5
 setuptools            |51.1.1
 sqlparse              |0.4.1
 redis                 |3.5.3
+mysqlclient           |2.0.3
+
+
 
 
 
