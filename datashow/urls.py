@@ -19,5 +19,6 @@ urlpatterns = [
     path('lastb.html', views.lastb, name='lastb'),
     path('config.html', views.config, name='config'),
     path('about.html', views.about, name='about'),
-    path('login.html', views.test, name='test'),
+    path('login.html', views.login, name='login'),
+    path('logout', views.logout, name='logout'),
 ]
