@@ -88,7 +88,12 @@
                                                     <th class="sorting_desc" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1" aria-sort="descending"
                                                         aria-label="Start date: activate to sort column ascending"
-                                                        style="width: 88px;">时间
+                                                        style="width: 88px;">#
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 62px;">时间
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
@@ -110,6 +115,7 @@
                                                 <tbody>
                                                 {% for item in lastb_list %}
                                                 <tr>
+                                                <td>{{item.id}}</td>
                                                 <td>{{item.time}}</td>
                                                 <td>{{item.ip}}</td>
                                                 <td>{{item.terminal}}</td>

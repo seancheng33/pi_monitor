@@ -90,10 +90,15 @@
                                                    role="grid" aria-describedby="example1_info">
                                                 <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="Name: activate to sort column descending"
-                                                        style="width: 88px;">时间
+                                                    <th class="sorting_desc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="descending"
+                                                        aria-label="Name: activate to sort column ascending"
+                                                        style="width: 88px;">#
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 163px;">时间
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1"
@@ -125,6 +130,7 @@
                                                 <tbody>
                                                 {% for item in all_data %}
                                                 <tr>
+                                                <td>{{item.pk}}</td>
                                                 <td>{{item.date}}</td>
                                                 <td>{{item.cpu_user_precent}}</td>
                                                 <td>{{item.cpu_sys_precent}}</td>

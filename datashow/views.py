@@ -137,7 +137,7 @@ def about(request):
     context = {}
     return render(request, "about.html", context)
 
-
+# 登录系统的验证
 def login(request):
     # 超管用户名是用python manage.py createsuperuser创建的（admin/admin123）
     # print(request.method)
@@ -161,9 +161,9 @@ def login(request):
     context = {"error":"请登陆系统已正常使用各种功能。"}
     return render(request, "login.html", context)
 
+
+# 登出系统，利用logout函数清理掉登录信息。
 def logout(request):
     auth.logout(request)
+    return HttpResponseRedirect(reverse('login'))
 
-    print("logout")
-    context = {"error":"已经退出系统，请重新登陆。"}
-    return HttpResponseRedirect(reverse('login'), context)

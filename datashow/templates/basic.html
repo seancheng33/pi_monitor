@@ -91,22 +91,22 @@
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
-                                    <h5 class="text-overflow"><small>Hello, {{ user.username}}</small> </h5>
+                                    <h5 class="text-overflow"><small>你好, {{ user.username}} 。</small> </h5>
                                 </div>
 
                                 <!-- item-->
+                                <a href="admin/" class="dropdown-item notify-item">
+                                    <i class="fa fa-database"></i> <span>自带模块管理数据</span>
+                                </a>
+
+                                <!-- item-->
                                 <a href="pro-profile.html" class="dropdown-item notify-item">
-                                    <i class="fa fa-user"></i> <span>Profile</span>
+                                    <i class="fa fa-user"></i> <span>用户信息</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="{% url 'logout'%}" class="dropdown-item notify-item">
-                                    <i class="fa fa-power-off"></i> <span>登出系统</span>
-                                </a>
-
-								<!-- item-->
-                                <a target="_blank" href="#" class="dropdown-item notify-item">
-                                    <i class="fa fa-external-link"></i> <span>Pike Admin</span>
+                                    <i class="fa fa-sign-out"></i> <span>登出系统</span>
                                 </a>
                             </div>
                         </li>
@@ -156,7 +156,7 @@
                     </li>
 
 					<li class="submenu">
-                        <a href="config.html"><i class="fa fa-fw fa-file-text-o"></i> <span> 系统配置 </span></a>
+                        <a href="config.html"><i class="fa fa-fw fa-gears"></i> <span> 系统配置 </span></a>
                     </li>
 					
                     <li class="submenu">
