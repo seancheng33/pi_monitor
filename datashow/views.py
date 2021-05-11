@@ -125,7 +125,7 @@ def lastb(request):
     for i in range(0, db_num):
         tmp = {}
         item = r.lrange('failed' + str(i), 0, 3)
-        tmp['id'] = i + 1
+        tmp['id'] = i + 1   # 添加一个id，用于作为数据的排序用
         tmp['time'] = item[0]
         tmp['ip'] = item[1]
         tmp['terminal'] = item[2]
