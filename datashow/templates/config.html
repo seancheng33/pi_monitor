@@ -22,6 +22,111 @@
                     </div>
                 </div>
                 <!-- end row -->
+						<div class="row">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+										<div class="card mb-3">
+											<div class="card-header">
+												<h3><i class="fa fa-user"></i> 系统配置</h3>
+											</div>
+
+											<div class="card-body">
+
+
+												<form action="{% url 'config' %}" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<div class="row">
+
+												<div class="col-lg-6 col-xl-6">
+
+													<div class="row">
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>mysql服务IP</label>
+														<input class="form-control" name="mysql_host" type="text" value="{{ mysql_host }}" />
+														</div>
+														</div>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>mysql服务端口</label>
+														<input class="form-control" name="mysql_port" type="text" value="{{ mysql_port }}" />
+														</div>
+														</div>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>mysql数据库名</label>
+														<input class="form-control" name="mysql_dbname" type="text" value="{{ mysql_dbname}}" />
+														</div>
+														</div>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>mysql用户名</label>
+														<input class="form-control" name="mysql_user" type="text" value="{{ mysql_user }}" />
+														</div>
+														</div>
+
+                                                        <div class="col-lg-12">
+														<div class="form-group">
+														<label>mysql密码</label>
+														<input class="form-control" name="mysql_password" type="text" value="{{ mysql_password }}" />
+														</div>
+														</div>
+
+														<hr>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>redis服务IP</label>
+														<input class="form-control" name="redis_host" type="text" value="{{ redis_host }}" />
+														</div>
+														</div>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>redis服务端口</label>
+														<input class="form-control" name="redis_port" type="text" value="{{ redis_port }}" />
+														</div>
+														</div>
+
+														<div class="col-lg-12">
+														<div class="form-group">
+														<label>redis数据库名</label>
+														<input class="form-control" name="redis_db" type="text" value="{{ redis_db}}" />
+														</div>
+														</div>
+
+                                                        <div class="col-lg-12">
+														<div class="form-group">
+														<label>redis密码</label>
+														<input class="form-control" name="redis_password" type="text" value="{{ redis_password }}" />
+														</div>
+														</div>
+
+													</div>
+
+													<div class="row">
+														<div class="col-lg-12">
+														<button type="submit" class="btn btn-primary">更新配置</button>
+														</div>
+													</div>
+
+												</div>
+                                                </div>
+												</form>
+
+								</div>
+								<!-- end card-body -->
+
+							</div>
+							<!-- end card -->
+
+						</div>
+						<!-- end col -->
+
+					</div>
+					<!-- end row -->
 
 
 

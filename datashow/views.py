@@ -125,12 +125,13 @@ def lastb(request):
     for i in range(0, db_num):
         tmp = {}
         item = r.lrange('failed' + str(i), 0, 3)
+        tmp['id'] = i + 1
         tmp['time'] = item[0]
         tmp['ip'] = item[1]
         tmp['terminal'] = item[2]
         tmp['name'] = item[3]
         lastb_list.append(tmp)
-    # print(lastb_list)
+    print(lastb_list)
 
     context = {'count': failed_count, 'total_ip_num': total_ip_num, 'total_name_num': total_name_num, 'db_num': db_num,
                'lastb_list': lastb_list}
@@ -140,7 +141,53 @@ def lastb(request):
 @login_required(login_url='login.html')
 def config(request):
 
-    context = {}
+    mysql_host = cf.get('mysql','mysql_host')
+    mysql_port = cf.get('mysql','mysql_port')
+    mysql_user = cf.get('mysql','mysql_user')
+    mysql_password = cf.get('mysql','mysql_password')
+    mysql_dbname = cf.get('mysql','mysql_dbname')
+
+    redis_host = cf.get('redis','redis_host')
+    redis_port = cf.get('redis','redis_port')
+    redis_password = cf.get('redis','redis_password')
+    redis_db = cf.get('redis','redis_db')
+
+
+    # 获取相应的配置信息的内容，然后还需要判断是post还是get，
+    if request.method == 'POST':
+        # 获取页面传回来的数据
+        mysql_host = request.POST.get('mysql_host')
+        mysql_port = request.POST.get('mysql_port')
+        mysql_user = request.POST.get('mysql_user')
+        mysql_password = request.POST.get('mysql_password')
+        mysql_dbname = request.POST.get('mysql_dbname')
+
+        redis_host = request.POST.get('redis_host')
+        redis_port = request.POST.get('redis_port')
+        redis_password = request.POST.get('redis_password')
+        redis_db = request.POST.get('redis_db')
+
+        # 将数据保存会配置文件中
+        cf.set('mysql', 'mysql_host', mysql_host)
+        cf.set('mysql', 'mysql_port', mysql_port)
+        cf.set('mysql', 'mysql_user', mysql_user)
+        cf.set('mysql', 'mysql_password', mysql_password)
+        cf.set('mysql', 'mysql_dbname', mysql_dbname)
+
+        cf.set('redis', 'redis_host', redis_host)
+        cf.set('redis', 'redis_port', redis_port)
+        cf.set('redis', 'redis_password', redis_password)
+        cf.set('redis', 'redis_db', redis_db)
+
+        context = {"mysql_host": mysql_host, 'mysql_port': mysql_port, 'mysql_user': mysql_user,
+                   'mysql_password': mysql_password,
+                   'mysql_dbname': mysql_dbname, 'redis_host': redis_host, 'redis_port': redis_port,
+                   'redis_password': redis_password, 'redis_db': redis_db}
+        return render(request, "config.html", context)
+
+    context = {"mysql_host": mysql_host,'mysql_port':mysql_port,'mysql_user':mysql_user,'mysql_password':mysql_password,
+               'mysql_dbname':mysql_dbname,'redis_host':redis_host,'redis_port':redis_port,
+               'redis_password':redis_password,'redis_db':redis_db}
     return render(request, "config.html", context)
 
 @login_required(login_url='login.html')
