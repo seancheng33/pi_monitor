@@ -2,3 +2,4 @@
 /pi_monitor/settings.py
 /api/migrations/
 /datashow/migrations/
+/pi_monitor/config.ini

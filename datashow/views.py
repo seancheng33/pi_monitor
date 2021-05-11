@@ -7,6 +7,14 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from api.models import *
 import redis
+# 导入配置文件及初始化配置
+import configparser
+from pi_monitor import settings
+
+path = settings.CONF_DIR
+cf = configparser.ConfigParser()
+cf.read(path)
+
 
 
 # Create your views here.
@@ -104,8 +112,12 @@ def lastb(request):
     total_ip_num = LoginFailed.objects.values('fail_ip').distinct().count()
     # print(all_fail_ip)
 
+
+
     # 连接redis库，获取redis中的一些高频信息
-    pool = redis.ConnectionPool(host='192.168.1.90', port=6379, db=1, password='test123456', decode_responses=True)
+    pool = redis.ConnectionPool(host=cf.get('redis', 'redis_host'), port=cf.get('redis', 'redis_port'),
+                                db=cf.get('redis', 'redis_db'), password=cf.get('redis', 'redis_password'),
+                                decode_responses=True)
     r = redis.Redis(connection_pool=pool)
     # 获取该库的数据总数
     db_num = r.dbsize()

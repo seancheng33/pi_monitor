@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import configparser
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+CONF_DIR = os.path.join(BASE_DIR, 'pi_monitor/config.ini')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -72,15 +74,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 
-
+cf=configparser.ConfigParser()
+cf.read(CONF_DIR)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '192.168.1.89',
-        'PORT': '3306',
-        'NAME': 'monitor',  # 数据库名
-        'USER': 'root',
-        'PASSWORD': 'Tkp@443414',
+        'HOST': cf.get('mysql', 'mysql_host'),
+        'PORT': cf.get('mysql', 'mysql_port'),
+        'NAME': cf.get('mysql', 'mysql_dbname'),  # 数据库名
+        'USER': cf.get('mysql', 'mysql_user'),
+        'PASSWORD': cf.get('mysql', 'mysql_password'),
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
@@ -124,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-STATIC_ROOT = os.path.join(BASE_DIR,"/static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
 # # 这里添加定时任务,这个插件的定时任务在windows中无法使用，等移植到linux下再用。
 # # 部署的时候需要使用python manager.py crontab add将定时任务添加到系统中
