@@ -28,7 +28,7 @@ def getSyetemInfo():
     # 通过socket模块获取hostname和ip地址。但是可能存在ip地址非内网地址的情况
     hostname = socket.gethostname()
     # host_ip = socket.gethostbyname(hostname)
-    host_ip = os.popen("ip a|grep eth0|grep inet|awk '{print $2}'").readline().replace('\n', '')
+    host_ip = os.popen("hostname -I").readline().replace('\n', '')      # 直接hostname -I可以获取得到主机的说有ip
     # 获取mac地址，这个办法在虚拟机的ubuntu中是出现有误，但是在其他真机的测试中暂时没有发现有误。
     mac = uuid.uuid1().hex
     # 最后12位就是mac的内容，将其取出，然后全部小写改为大写。
