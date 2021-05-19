@@ -192,8 +192,9 @@ def config(request):
 
 @login_required(login_url='login.html')
 def about(request):
+    version = cf.get('system','version')
 
-    context = {}
+    context = {"version": version}
     return render(request, "about.html", context)
 
 # 登录系统的验证
@@ -207,8 +208,8 @@ def login(request):
         p = request.POST.get('password')
         # 利用知道的认证功能，把页面post过来的用户名和密码，利用该功能验证并返回user对象，
         # 这个user对象在下面的登陆中需要用到。
-        user = auth.authenticate(username=u,password=p)
-        print(u,p)
+        user = auth.authenticate(username=u, password=p)
+        # print(u, p)
         # 如果user对象有返回，就是用户是存在的，可以调用login函数登陆，如果没有，就是验证失败，返回错误提示信息。
         if user is not None:
             auth.login(request,user)

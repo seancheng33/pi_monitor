@@ -139,11 +139,17 @@ def getLastb():
             last_item['terminal'] = n_item[1].replace(' ', '')
             last_item['fail_ip'] = n_item[2].replace(' ', '')
             last_item['date'] = n_item[3].lstrip()  # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
-        elif len(n_item) == 3:
+        # 2021年5月19日，分隔后为3个元素分为两种情况，一种是因为用户的长度的问题导致的分隔，一种是ip的长度问题导致的分隔。
+        elif len(n_item) == 3 and len(n_item[0]) > 12:     # 判断因为用户的长度的问题导致的分隔情况
             last_item['fail_name'] = n_item[0].split(' ')[0]
-            last_item['terminal'] = n_item[0].split(' ')[1]
+            last_item['terminal'] = ''.join(n_item[0].split(' ')[1:])
             last_item['fail_ip'] = n_item[1].replace(' ', '')
             last_item['date'] = n_item[2].lstrip()  # 2021年5月4日发现用切片[1:]存在问题，改为lstrip去掉左边的空格。
+        elif len(n_item) == 3 and len(n_item[2]) > 20:      # 判断因为ip的长度的问题导致的分隔情况
+            last_item['fail_name'] = n_item[0]
+            last_item['terminal'] = n_item[1].lstrip()
+            last_item['fail_ip'] = n_item[2].split('  ')[0].lstrip()     # 两个空格的切片后，前面的第一个元素就是ip
+            last_item['date'] = ' '.join(n_item[2].split('  ')[1:])   # 两个空格的切片后，需要取后面的全部，这样才是时间的内容
         else:
             continue
 
@@ -162,16 +168,22 @@ def getLastbNow():
     for item in lastb:
         n_item = item.replace('\n', '').split('   ')
         last_item = []
+
         if len(n_item) == 4:
             last_item.append(n_item[0])
             last_item.append(n_item[1].replace(' ', ''))
             last_item.append(n_item[2].replace(' ', ''))
             last_item.append(n_item[3].lstrip())
-        elif len(n_item) == 3:
+        elif len(n_item) == 3 and len(n_item[0]) > 12:
             last_item.append(n_item[0].split(' ')[0])
-            last_item.append(n_item[0].split(' ')[1])
+            last_item.append(''.join(n_item[0].split(' ')[1:]))
             last_item.append(n_item[1].replace(' ', ''))
             last_item.append(n_item[2].lstrip())
+        elif len(n_item) == 3 and len(n_item[2]) > 20:
+            last_item.append(n_item[0])
+            last_item.append(n_item[1].lstrip())
+            last_item.append(n_item[2].split('  ')[0].lstrip())
+            last_item.append(' '.join(n_item[2].split('  ')[1:]))
         else:
             continue
         # print(last_item)
