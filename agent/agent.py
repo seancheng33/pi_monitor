@@ -162,7 +162,7 @@ def getLastb():
 def getLastbNow():
     r_pool = redis.ConnectionPool(host='192.168.1.90', port=6379, db=1, password='test123456', decode_responses=True)
     r = redis.Redis(connection_pool=r_pool)
-
+    r.flushdb()     # 先清理数据再添加，确保每次的数据都是事实的条数的数据。
     lastb = os.popen("lastb|grep -v btmp").readlines()
     i = 0
     for item in lastb:

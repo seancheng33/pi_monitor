@@ -131,7 +131,7 @@ def lastb(request):
         tmp['terminal'] = item[2]
         tmp['name'] = item[3]
         lastb_list.append(tmp)
-    print(lastb_list)
+    # print(lastb_list)
 
     context = {'count': failed_count, 'total_ip_num': total_ip_num, 'total_name_num': total_name_num, 'db_num': db_num,
                'lastb_list': lastb_list}
