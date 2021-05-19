@@ -129,9 +129,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
-# # 这里添加定时任务,这个插件的定时任务在windows中无法使用，等移植到linux下再用。
-# # 部署的时候需要使用python manager.py crontab add将定时任务添加到系统中
-# CRONJOBS=(
-# 	# 每一分钟执行一次你的定时函数
-# 	('*/1 * * * *', 'django.core.management.call_command', ['python /mnt/usbdisk1/pi_monitor/agent/agent.py']),
-# )
+
+# 登陆的session失效时间，单位为秒
+SESSION_COOKIE_AGE = 86400
+# 是否关闭浏览器使得Session过期
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# 是否每次请求都保存Session
+SESSION_SAVE_EVERY_REQUEST = True
