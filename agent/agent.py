@@ -198,18 +198,23 @@ if __name__ == '__main__':
     # 获取系统的信息
     sysinfo = json.dumps(getSyetemInfo())
     # print(sysinfo)
-    check_sys = os.popen('curl http://127.0.0.1:8000/api/mechineinfo/').readlines()
+    check_sys = os.popen('curl http://127.0.0.1:8000/api/mechineinfo/?format=json').readlines()
+    sys_list =json.loads(check_sys[0])
     # 这里有作一个判断，如果mac地址相同，就只是更新对应主键的数据，如果没有，就新添加数据。
     # print(sysinfo)
-    if len(check_sys) > 0:
-        for item in json.loads(check_sys[0]):
+    if len(sys_list) > 0:
+        for item in sys_list:
             # print(item)
+            # 对比拿到的值和现有的值的mac地址是否一致，如果一致的话，就是同一台机器，则更新数据。如果不一致，则将获取到的数据添加为一行新的数据。
             if item.get('mac_address') == eval(sysinfo)['mac_address']:
                 # 获取系统信息数据的pk值，用于到时更新数据时使用。
                 pk = item.get('pk')
                 # print("1"+sysinfo)
                 os.popen("curl -H 'content-type: application/json' -d '" + str(
                     sysinfo) + "' -X put http://127.0.0.1:8000/api/mechineinfo/" + str(pk) + "/").readlines()
+            else:
+                os.popen("curl -H 'content-type: application/json' -d '" + str(
+                    sysinfo) + "' -X post http://127.0.0.1:8000/api/mechineinfo/").readlines()
     else:
         # print("2"+sysinfo)
         os.popen("curl -H 'content-type: application/json' -d '" + str(
