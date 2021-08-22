@@ -1,0 +1,9 @@
+asgiref==3.3.1
+configparser==5.0.2
+Django==3.1.5
+djangorestframework==3.12.2
+mysqlclient==2.0.3
+pkg-resources==0.0.0
+pytz==2020.5
+redis==3.5.3
+sqlparse==0.4.1

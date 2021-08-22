@@ -4,7 +4,7 @@
 startapp(){
 echo "-----启动django网站服务-----"
 # 直接指定虚拟环境的python来执行启动服务
-nohup /mnt/usbdisk1/pi_monitor/venv/bin/python manage.py runserver 0.0.0.0:8000 >> webserver.log 2>&1 & 
+nohup venv/bin/python manage.py runserver 0.0.0.0:8000 >> webserver.log 2>&1 & 
 echo "启动服务完成"
 }
 # 停止服务的函数
