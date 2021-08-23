@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django_redis import get_redis_connection
+
 from api.models import *
 import redis
 # 导入配置文件及初始化配置
@@ -115,10 +117,12 @@ def lastb(request):
 
 
     # 连接redis库，获取redis中的一些高频信息
-    pool = redis.ConnectionPool(host=cf.get('redis', 'redis_host'), port=cf.get('redis', 'redis_port'),
-                                db=cf.get('redis', 'redis_db'), password=cf.get('redis', 'redis_password'),
-                                decode_responses=True)
-    r = redis.Redis(connection_pool=pool)
+    # pool = redis.ConnectionPool(host=cf.get('redis', 'redis_host'), port=cf.get('redis', 'redis_port'),
+    #                             db=cf.get('redis', 'redis_db'), password=cf.get('redis', 'redis_password'),
+    #                             decode_responses=True)
+    # r = redis.Redis(connection_pool=pool)
+    r = get_redis_connection()
+
     # 获取该库的数据总数
     db_num = r.dbsize()
     lastb_list = []
