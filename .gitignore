@@ -1,5 +1,12 @@
-/venv/
+# pycharm ide工作空间配置文件
+.idea/
+
+./venv/*
 /pi_monitor/settings.py
 /api/migrations/
 /datashow/migrations/
 /pi_monitor/config.ini
+
+# 数据库的合并文件
+*/migrations/*.py
+!*/migrations/__init__.py
