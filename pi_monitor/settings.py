@@ -74,21 +74,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pi_monitor.wsgi.application'
 
-cf=configparser.ConfigParser()
-cf.read(CONF_DIR)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': cf.get('mysql', 'mysql_host'),
-        'PORT': cf.get('mysql', 'mysql_port'),
-        'NAME': cf.get('mysql', 'mysql_dbname'),  # 数据库名
-        'USER': cf.get('mysql', 'mysql_user'),
-        'PASSWORD': cf.get('mysql', 'mysql_password'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+cf=configparser.ConfigParser()
+cf.read(CONF_DIR)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': cf.get('mysql', 'mysql_host'),
+#         'PORT': cf.get('mysql', 'mysql_port'),
+#         'NAME': cf.get('mysql', 'mysql_dbname'),  # 数据库名
+#         'USER': cf.get('mysql', 'mysql_user'),
+#         'PASSWORD': cf.get('mysql', 'mysql_password'),
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         },
+#     }
+# }
 
 CACHES = {
     "default": {

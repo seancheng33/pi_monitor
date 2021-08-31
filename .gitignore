@@ -2,11 +2,12 @@
 .idea/
 
 ./venv/*
-/pi_monitor/settings.py
-/api/migrations/
-/datashow/migrations/
-/pi_monitor/config.ini
+./pi_monitor/settings.py
+./api/migrations/
+./.idea/
+./pi_monitor/config.ini
 
-# 数据库的合并文件
+# 数据库及其的合并文件
+./*.sqlite3
 */migrations/*.py
 !*/migrations/__init__.py
